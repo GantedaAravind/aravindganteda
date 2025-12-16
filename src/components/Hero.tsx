@@ -1,153 +1,214 @@
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Github, Linkedin, Mail, Download, Code2 } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, ExternalLink } from "lucide-react";
+
+const techStack = [
+  { name: "React", icon: "</>" },
+  { name: "Node.js", icon: "</>" },
+  { name: "TypeScript", icon: "</>" },
+  { name: "MongoDB", icon: "🍃" },
+  { name: "PostgreSQL", icon: "🐘" },
+  { name: "AWS", icon: "☁️" },
+];
+
+const stats = [
+  { value: "15+", label: "Projects Built" },
+  { value: "3+", label: "Years Exp" },
+  { value: "10+", label: "Technologies" },
+];
 
 const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden px-6 pt-20">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[100px] animate-float" />
-        <div className="absolute bottom-1/4 -right-32 w-[400px] h-[400px] bg-primary/5 rounded-full blur-[80px] animate-float" style={{ animationDelay: '3s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px]" />
+    <section className="min-h-screen pt-24 pb-16 relative overflow-hidden">
+      {/* Floating Decorations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-32 right-[20%] w-2 h-2 rounded-full bg-primary/40 animate-pulse" />
+        <div className="absolute top-48 right-[35%] w-1.5 h-1.5 rounded-full bg-primary/30" />
+        <div className="absolute top-64 right-[15%] w-2.5 h-2.5 rounded-full bg-primary/20" />
+        <div className="absolute top-80 right-[40%] w-1.5 h-1.5 rounded-full bg-muted-foreground/20" />
+        <div className="absolute top-96 right-[25%] w-2 h-2 rounded-full bg-primary/30 animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-[28rem] right-[30%] w-1.5 h-1.5 rounded-full bg-primary/25" />
+        <div className="absolute bottom-48 right-[18%] w-2 h-2 rounded-full bg-primary/35" />
+        <div className="absolute bottom-32 left-[10%] w-1.5 h-1.5 rounded-full bg-muted-foreground/20" />
+        <div className="absolute top-40 left-[5%] w-2 h-2 rounded-full bg-primary/20" />
       </div>
 
-      {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
-      
-      <div className="container max-w-6xl relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container max-w-6xl mx-auto px-6">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
           {/* Left Content */}
-          <div className="text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 mb-8 animate-fade-up">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-              </span>
-              <span className="text-green-400 font-medium text-sm">Open to Work</span>
+          <div className="text-left">
+            {/* Availability Badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-muted/80 border border-border mb-8 animate-fade-up">
+              <span className="text-xl">👋</span>
+              <span className="text-muted-foreground font-medium text-sm">Available for new opportunities</span>
             </div>
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 animate-fade-up-delay-1 leading-tight">
-              I'm{" "}
-              <span className="text-gradient">Aravind Ganteda</span>
+            {/* Greeting */}
+            <p className="text-2xl md:text-3xl text-muted-foreground font-light mb-4 animate-fade-up-delay-1">
+              Hi, I'm
+            </p>
+            
+            {/* Name */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-display font-bold mb-6 animate-fade-up-delay-1 leading-tight">
+              <span className="text-gradient">Aravind</span>
+              <br />
+              <span className="text-foreground">Ganteda</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-foreground font-display font-semibold mb-4 animate-fade-up-delay-2">
-              Full-Stack Developer Who Builds Products That Scale
+            {/* Role */}
+            <h2 className="text-xl md:text-2xl text-foreground font-display font-semibold mb-2 animate-fade-up-delay-2">
+              Software Engineer & Full-Stack Developer
+            </h2>
+            
+            {/* Specialty */}
+            <p className="text-primary font-medium text-lg mb-6 animate-fade-up-delay-2">
+              Scalable Web Solutions Specialist
             </p>
             
-            <p className="text-muted-foreground text-base md:text-lg max-w-xl mx-auto lg:mx-0 mb-10 animate-fade-up-delay-2 leading-relaxed">
-              I turn complex problems into elegant, high-performance web applications. 
-              From architecting robust backends to crafting pixel-perfect interfaces—I deliver 
-              <span className="text-foreground font-medium"> clean code</span>, 
-              <span className="text-foreground font-medium"> scalable systems</span>, and 
-              <span className="text-foreground font-medium"> measurable results</span>.
+            {/* Description */}
+            <p className="text-muted-foreground text-base md:text-lg max-w-xl mb-8 animate-fade-up-delay-2 leading-relaxed">
+              I build scalable web applications and robust backend systems that help businesses grow. 
+              Currently engineering solutions that make a real impact.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center animate-fade-up-delay-3">
-              <Button variant="hero" size="xl" asChild>
+            {/* Tech Stack */}
+            <div className="mb-8 animate-fade-up-delay-3">
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Working With</p>
+              <div className="flex flex-wrap gap-2">
+                {techStack.map((tech) => (
+                  <span
+                    key={tech.name}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted/60 border border-border text-sm text-muted-foreground hover:text-foreground hover:border-primary/30 transition-colors"
+                  >
+                    <span className="text-primary font-mono text-xs">{tech.icon}</span>
+                    {tech.name}
+                  </span>
+                ))}
+              </div>
+            </div>
+            
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 mb-8 animate-fade-up-delay-3">
+              <Button size="lg" className="gap-2 rounded-full px-6 shadow-lg shadow-primary/25" asChild>
                 <a href="#projects">
-                  <Code2 className="w-5 h-5 mr-2" />
                   View My Work
+                  <ExternalLink className="w-4 h-4" />
                 </a>
               </Button>
-              <Button variant="heroOutline" size="xl" asChild>
-                <a href="/resume.pdf" download>
-                  <Download className="w-5 h-5 mr-2" />
-                  Download Resume
+              <Button variant="outline" size="lg" className="gap-2 rounded-full px-6" asChild>
+                <a href="#contact">
+                  <Mail className="w-4 h-4" />
+                  Let's Connect
                 </a>
               </Button>
             </div>
-
+            
             {/* Social Links */}
-            <div className="flex gap-4 justify-center lg:justify-start mt-10 animate-fade-up-delay-3">
-              <a 
-                href="https://github.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="p-3 rounded-xl bg-secondary/50 border border-border hover:border-primary/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300"
+            <div className="flex items-center gap-3 animate-fade-up-delay-3">
+              <Button variant="outline" size="sm" className="gap-2 rounded-full" asChild>
+                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="w-4 h-4" />
+                  Follow on LinkedIn
+                </a>
+              </Button>
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-full border border-border hover:bg-muted/50 hover:border-primary/30 transition-colors text-muted-foreground hover:text-foreground"
               >
                 <Github className="w-5 h-5" />
               </a>
-              <a 
-                href="https://linkedin.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="p-3 rounded-xl bg-secondary/50 border border-border hover:border-primary/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a 
-                href="mailto:hello@aravindganteda.dev" 
-                className="p-3 rounded-xl bg-secondary/50 border border-border hover:border-primary/50 hover:bg-primary/10 text-muted-foreground hover:text-primary transition-all duration-300"
+              <a
+                href="mailto:hello@aravindganteda.dev"
+                className="p-2.5 rounded-full border border-border hover:bg-muted/50 hover:border-primary/30 transition-colors text-muted-foreground hover:text-foreground"
               >
                 <Mail className="w-5 h-5" />
               </a>
             </div>
           </div>
-
-          {/* Right Visual */}
-          <div className="hidden lg:flex justify-center items-center animate-fade-up-delay-2">
-            <div className="relative">
-              {/* Main code block visual */}
-              <div className="w-[400px] h-[400px] relative">
-                {/* Glowing ring */}
-                <div className="absolute inset-0 rounded-full border border-primary/20 animate-pulse" />
-                <div className="absolute inset-4 rounded-full border border-primary/10" />
-                <div className="absolute inset-8 rounded-full border border-primary/5" />
-                
-                {/* Center content */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="card-glass rounded-2xl p-8 w-[280px]">
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="w-3 h-3 rounded-full bg-destructive/80" />
-                      <div className="w-3 h-3 rounded-full bg-primary/80" />
-                      <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                    </div>
-                    <div className="space-y-3 font-mono text-sm">
-                      <div className="flex gap-2">
-                        <span className="text-primary">const</span>
-                        <span className="text-foreground">developer</span>
-                        <span className="text-muted-foreground">=</span>
-                        <span className="text-muted-foreground">{"{"}</span>
-                      </div>
-                      <div className="pl-4 text-muted-foreground">
-                        name: <span className="text-green-400">"Aravind"</span>,
-                      </div>
-                      <div className="pl-4 text-muted-foreground">
-                        skills: <span className="text-primary">["React",</span>
-                      </div>
-                      <div className="pl-8 text-primary">
-                        "Node", "TypeScript"]
-                      </div>
-                      <div className="pl-4 text-muted-foreground">
-                        passion: <span className="text-green-400">"Building"</span>
-                      </div>
-                      <div className="text-muted-foreground">{"}"}</div>
-                    </div>
-                  </div>
+          
+          {/* Right Content - Code Block & Stats */}
+          <div className="relative lg:pl-8">
+            {/* Code Block */}
+            <div className="relative bg-card/80 backdrop-blur-sm rounded-2xl border border-border shadow-2xl shadow-primary/5 overflow-hidden animate-fade-up-delay-2">
+              {/* Window Header */}
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/30">
+                <div className="flex gap-1.5">
+                  <span className="w-3 h-3 rounded-full bg-red-500/80" />
+                  <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                  <span className="w-3 h-3 rounded-full bg-green-500/80" />
                 </div>
-
-                {/* Floating badges */}
-                <div className="absolute top-8 right-0 px-3 py-1.5 rounded-lg bg-primary/20 border border-primary/30 text-primary text-xs font-medium animate-float">
-                  React
-                </div>
-                <div className="absolute bottom-20 -left-4 px-3 py-1.5 rounded-lg bg-secondary border border-border text-foreground text-xs font-medium animate-float" style={{ animationDelay: '1s' }}>
-                  TypeScript
-                </div>
-                <div className="absolute bottom-8 right-8 px-3 py-1.5 rounded-lg bg-secondary border border-border text-foreground text-xs font-medium animate-float" style={{ animationDelay: '2s' }}>
-                  Node.js
-                </div>
+                <span className="text-xs text-muted-foreground font-mono ml-2">developer.js</span>
               </div>
+              
+              {/* Code Content */}
+              <div className="p-6 font-mono text-sm">
+                <pre className="text-muted-foreground leading-relaxed">
+                  <code>
+                    <span className="text-primary/80">const</span>{" "}
+                    <span className="text-foreground">developer</span>{" "}
+                    <span className="text-muted-foreground">=</span>{" "}
+                    <span className="text-muted-foreground">{"{"}</span>
+                    {"\n"}
+                    {"  "}<span className="text-primary/70">name</span>
+                    <span className="text-muted-foreground">:</span>{" "}
+                    <span className="text-green-400/90">'Aravind Ganteda'</span>
+                    <span className="text-muted-foreground">,</span>
+                    {"\n"}
+                    {"  "}<span className="text-primary/70">role</span>
+                    <span className="text-muted-foreground">:</span>{" "}
+                    <span className="text-green-400/90">'Full-Stack Developer'</span>
+                    <span className="text-muted-foreground">,</span>
+                    {"\n"}
+                    {"  "}<span className="text-primary/70">skills</span>
+                    <span className="text-muted-foreground">:</span>{" "}
+                    <span className="text-muted-foreground">[</span>
+                    <span className="text-green-400/90">'React'</span>
+                    <span className="text-muted-foreground">,</span>{" "}
+                    <span className="text-green-400/90">'Node.js'</span>
+                    <span className="text-muted-foreground">,</span>{" "}
+                    <span className="text-green-400/90">'TypeScript'</span>
+                    <span className="text-muted-foreground">],</span>
+                    {"\n"}
+                    {"  "}<span className="text-primary/70">passion</span>
+                    <span className="text-muted-foreground">:</span>{" "}
+                    <span className="text-green-400/90">'Building scalable solutions'</span>
+                    <span className="text-muted-foreground">,</span>
+                    {"\n"}
+                    {"  "}<span className="text-primary/70">status</span>
+                    <span className="text-muted-foreground">:</span>{" "}
+                    <span className="text-green-400/90">'Open to opportunities'</span>
+                    {"\n"}
+                    <span className="text-muted-foreground">{"};"}</span>
+                    <span className="animate-pulse text-primary">|</span>
+                  </code>
+                </pre>
+              </div>
+            </div>
+            
+            {/* Stats */}
+            <div className="flex justify-center gap-8 mt-8 animate-fade-up-delay-3">
+              {stats.map((stat) => (
+                <div key={stat.label} className="text-center">
+                  <p className="text-2xl md:text-3xl font-bold text-primary">{stat.value}</p>
+                  <p className="text-xs text-muted-foreground font-medium">{stat.label}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
+        
+        {/* Scroll Indicator */}
+        <div className="flex flex-col items-center mt-16 animate-fade-up-delay-3">
+          <span className="text-sm text-muted-foreground mb-2">Discover More</span>
+          <a
+            href="#about"
+            className="p-2 rounded-full border border-border hover:border-primary/50 hover:bg-muted/50 transition-all animate-bounce"
+          >
+            <ArrowDown className="w-5 h-5 text-muted-foreground" />
+          </a>
+        </div>
       </div>
-
-      {/* Scroll indicator */}
-      <a href="#about" className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors group">
-        <span className="text-xs font-medium tracking-wider uppercase">Scroll</span>
-        <ArrowDown className="w-5 h-5 animate-bounce" />
-      </a>
     </section>
   );
 };
