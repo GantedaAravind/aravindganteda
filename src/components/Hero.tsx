@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Github, Linkedin, Mail, Download, Code2, Sparkles } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, Download, Code2 } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -18,24 +18,29 @@ const Hero = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8 animate-fade-up">
-              <Sparkles className="w-4 h-4 text-primary" />
-              <span className="text-primary font-medium text-sm">Available for opportunities</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 mb-8 animate-fade-up">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              <span className="text-green-400 font-medium text-sm">Open to Work</span>
             </div>
             
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 animate-fade-up-delay-1 leading-tight">
-              Hello, I'm{" "}
-              <span className="text-gradient block sm:inline">Aravind Ganteda</span>
+              I'm{" "}
+              <span className="text-gradient">Aravind Ganteda</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-muted-foreground font-display mb-4 animate-fade-up-delay-2">
-              Full-Stack Developer
+            <p className="text-xl md:text-2xl text-foreground font-display font-semibold mb-4 animate-fade-up-delay-2">
+              Full-Stack Developer Who Builds Products That Scale
             </p>
             
             <p className="text-muted-foreground text-base md:text-lg max-w-xl mx-auto lg:mx-0 mb-10 animate-fade-up-delay-2 leading-relaxed">
-              I transform ideas into powerful, user-centric web applications. 
-              Passionate about clean code, modern technologies, and creating 
-              digital experiences that make a real difference.
+              I turn complex problems into elegant, high-performance web applications. 
+              From architecting robust backends to crafting pixel-perfect interfaces—I deliver 
+              <span className="text-foreground font-medium"> clean code</span>, 
+              <span className="text-foreground font-medium"> scalable systems</span>, and 
+              <span className="text-foreground font-medium"> measurable results</span>.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center animate-fade-up-delay-3">
