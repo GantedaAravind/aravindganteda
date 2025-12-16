@@ -14,12 +14,12 @@ const Hero = () => {
         </p>
         
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6 animate-fade-up-delay-1">
-          Hi, I'm <span className="text-gradient">Alex Chen</span>
+          Hi, I'm <span className="text-gradient">Aravind Ganteda</span>
         </h1>
         
         <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto mb-10 animate-fade-up-delay-2 leading-relaxed">
-          I craft elegant digital experiences through clean code and thoughtful design. 
-          Specializing in building scalable web applications that make a difference.
+          I'm a passionate Full-Stack Developer who loves turning ideas into seamless, user-friendly digital experiences. 
+          Building innovative web solutions that solve real problems and create lasting impact.
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-up-delay-3">
@@ -38,7 +38,7 @@ const Hero = () => {
           <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors duration-300">
             <Linkedin className="w-6 h-6" />
           </a>
-          <a href="mailto:hello@alexchen.dev" className="text-muted-foreground hover:text-primary transition-colors duration-300">
+          <a href="mailto:hello@aravindganteda.dev" className="text-muted-foreground hover:text-primary transition-colors duration-300">
             <Mail className="w-6 h-6" />
           </a>
         </div>

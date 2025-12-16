@@ -9,9 +9,9 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo & Copyright */}
           <div className="text-center md:text-left">
-            <a href="#" className="text-xl font-display font-bold">
-              <span className="text-gradient">Alex Chen</span>
-            </a>
+          <a href="#" className="text-xl font-display font-bold">
+            <span className="text-gradient">Aravind Ganteda</span>
+          </a>
             <p className="text-sm text-muted-foreground mt-2 flex items-center gap-1 justify-center md:justify-start">
               Made with <Heart className="w-4 h-4 text-primary fill-primary" /> © {currentYear}
             </p>

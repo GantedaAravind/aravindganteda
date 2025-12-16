@@ -30,14 +30,15 @@ const About = () => {
               Passionate about creating impactful digital solutions
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-6">
-              I'm a Full-Stack Developer with 5+ years of experience building web applications 
-              that solve real-world problems. My journey started with curiosity about how things 
-              work on the internet, and it has evolved into a career dedicated to crafting 
-              exceptional user experiences.
+              I'm Aravind Ganteda, a Full-Stack Developer driven by curiosity and a love for 
+              building things that matter. With expertise spanning both frontend and backend 
+              technologies, I specialize in crafting scalable, performant applications that 
+              deliver exceptional user experiences.
             </p>
             <p className="text-muted-foreground leading-relaxed mb-8">
-              When I'm not coding, you'll find me exploring new technologies, contributing to 
-              open-source projects, or sharing knowledge through tech blog posts and mentoring.
+              Whether it's architecting robust APIs, designing intuitive interfaces, or optimizing 
+              database performance, I thrive on solving complex challenges with clean, maintainable code. 
+              I'm always eager to learn, collaborate, and push the boundaries of what's possible on the web.
             </p>
 
             {/* Quick stats */}

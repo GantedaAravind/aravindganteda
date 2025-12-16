@@ -43,13 +43,13 @@ const Contact = () => {
             <h3 className="text-xl font-display font-semibold mb-6">Contact Information</h3>
             
             <div className="space-y-6">
-              <a href="mailto:hello@alexchen.dev" className="flex items-center gap-4 group">
+              <a href="mailto:hello@aravindganteda.dev" className="flex items-center gap-4 group">
                 <div className="p-3 rounded-xl bg-secondary group-hover:bg-primary/10 transition-colors">
                   <Mail className="w-5 h-5 text-primary" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Email</p>
-                  <p className="font-medium group-hover:text-primary transition-colors">hello@alexchen.dev</p>
+                  <p className="font-medium group-hover:text-primary transition-colors">hello@aravindganteda.dev</p>
                 </div>
               </a>
 
