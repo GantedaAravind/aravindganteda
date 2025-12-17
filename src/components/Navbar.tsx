@@ -15,6 +15,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDark, setIsDark] = useState(true);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,6 +40,8 @@ const Navbar = () => {
   }, []);
 
   const toggleTheme = () => {
+    setIsAnimating(true);
+    
     const newIsDark = !isDark;
     setIsDark(newIsDark);
     
@@ -49,6 +52,8 @@ const Navbar = () => {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('theme', 'light');
     }
+    
+    setTimeout(() => setIsAnimating(false), 500);
   };
 
   return (
@@ -57,7 +62,7 @@ const Navbar = () => {
         isScrolled ? "bg-background/90 backdrop-blur-xl border-b border-border shadow-sm" : "bg-background/50 backdrop-blur-sm"
       }`}
     >
-      <nav className="container max-w-7xl mx-auto px-6 py-4">
+      <nav className="container max-w-7xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group">
@@ -92,10 +97,21 @@ const Navbar = () => {
             </Button>
             <button
               onClick={toggleTheme}
-              className="p-2.5 rounded-full hover:bg-muted/50 transition-colors text-muted-foreground hover:text-foreground"
+              className={`relative p-2.5 rounded-full hover:bg-muted/50 transition-all duration-300 text-muted-foreground hover:text-foreground overflow-hidden ${
+                isAnimating ? 'scale-110' : 'scale-100'
+              }`}
               aria-label="Toggle theme"
             >
-              {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              <div className={`transition-all duration-500 ${isAnimating ? 'rotate-[360deg]' : 'rotate-0'}`}>
+                {isDark ? (
+                  <Sun className={`w-5 h-5 transition-all duration-300 ${isAnimating ? 'text-yellow-400 scale-125' : ''}`} />
+                ) : (
+                  <Moon className={`w-5 h-5 transition-all duration-300 ${isAnimating ? 'text-primary scale-125' : ''}`} />
+                )}
+              </div>
+              {isAnimating && (
+                <span className="absolute inset-0 rounded-full bg-primary/20 animate-ping" />
+              )}
             </button>
           </div>
 
@@ -111,7 +127,7 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="lg:hidden absolute top-full left-0 right-0 bg-background/98 backdrop-blur-xl border-b border-border shadow-lg">
-            <div className="container px-6 py-6 flex flex-col gap-2">
+            <div className="container px-4 py-6 flex flex-col gap-2">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
@@ -131,10 +147,18 @@ const Navbar = () => {
                 </Button>
                 <button
                   onClick={toggleTheme}
-                  className="p-2.5 rounded-lg hover:bg-muted/50 transition-colors"
+                  className={`relative p-2.5 rounded-lg hover:bg-muted/50 transition-all duration-300 overflow-hidden ${
+                    isAnimating ? 'scale-110' : 'scale-100'
+                  }`}
                   aria-label="Toggle theme"
                 >
-                  {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+                  <div className={`transition-all duration-500 ${isAnimating ? 'rotate-[360deg]' : 'rotate-0'}`}>
+                    {isDark ? (
+                      <Sun className={`w-5 h-5 transition-all duration-300 ${isAnimating ? 'text-yellow-400 scale-125' : ''}`} />
+                    ) : (
+                      <Moon className={`w-5 h-5 transition-all duration-300 ${isAnimating ? 'text-primary scale-125' : ''}`} />
+                    )}
+                  </div>
                 </button>
               </div>
             </div>

@@ -1,72 +1,56 @@
 import { Button } from "@/components/ui/button";
-import { ArrowDown, Github, Linkedin, Mail, ExternalLink } from "lucide-react";
-import { useEffect, useState, useRef } from "react";
-
-const techStack = [
-  { name: "React", icon: "⚛️" },
-  { name: "Node.js", icon: "🟢" },
-  { name: "TypeScript", icon: "📘" },
-  { name: "MongoDB", icon: "🍃" },
-  { name: "MySQL", icon: "🐬" },
-  { name: "Python", icon: "🐍" },
-];
+import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const stats = [
   { value: "15+", label: "Projects Built" },
   { value: "400+", label: "DSA Problems" },
-  { value: "9.4", label: "CGPA" },
+  { value: "3+", label: "Years Coding" },
 ];
 
-// Typing animation hook
-const useTypingAnimation = (lines: string[], typingSpeed = 50, lineDelay = 500) => {
-  const [displayedLines, setDisplayedLines] = useState<string[]>([]);
-  const [currentLineIndex, setCurrentLineIndex] = useState(0);
-  const [currentCharIndex, setCurrentCharIndex] = useState(0);
+// Letter by letter typing animation hook
+const useTypingAnimation = (text: string, typingSpeed = 25, startDelay = 0) => {
+  const [displayedText, setDisplayedText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    if (currentLineIndex >= lines.length) {
-      setIsComplete(true);
-      return;
-    }
+    let timeout: NodeJS.Timeout;
+    
+    const startTyping = () => {
+      let currentIndex = 0;
+      
+      const typeNextChar = () => {
+        if (currentIndex < text.length) {
+          setDisplayedText(text.slice(0, currentIndex + 1));
+          currentIndex++;
+          timeout = setTimeout(typeNextChar, typingSpeed);
+        } else {
+          setIsComplete(true);
+        }
+      };
+      
+      typeNextChar();
+    };
+    
+    timeout = setTimeout(startTyping, startDelay);
+    
+    return () => clearTimeout(timeout);
+  }, [text, typingSpeed, startDelay]);
 
-    const currentLine = lines[currentLineIndex];
-
-    if (currentCharIndex < currentLine.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedLines(prev => {
-          const newLines = [...prev];
-          newLines[currentLineIndex] = currentLine.slice(0, currentCharIndex + 1);
-          return newLines;
-        });
-        setCurrentCharIndex(prev => prev + 1);
-      }, typingSpeed);
-      return () => clearTimeout(timeout);
-    } else {
-      const timeout = setTimeout(() => {
-        setCurrentLineIndex(prev => prev + 1);
-        setCurrentCharIndex(0);
-      }, lineDelay);
-      return () => clearTimeout(timeout);
-    }
-  }, [currentLineIndex, currentCharIndex, lines, typingSpeed, lineDelay]);
-
-  return { displayedLines, isComplete };
+  return { displayedText, isComplete };
 };
 
 const Hero = () => {
-  const codeLines = [
-    'const developer = {',
-    '  name: "Aravind Ganteda",',
-    '  role: "Full-Stack Developer",',
-    '  skills: ["React", "Node.js", "TypeScript"],',
-    '  experience: "Gridlex - Software Engineer",',
-    '  education: "B.Tech CSE - CGPA: 9.4/10",',
-    '  status: "Open to opportunities"',
-    '};',
-  ];
+  const codeText = `const developer = {
+  name: "Aravind Ganteda",
+  role: "Full-Stack Developer",
+  skills: ["React", "Node.js", "TypeScript"],
+  experience: "Gridlex - Software Engineer",
+  education: "B.Tech CSE - RGUKT",
+  status: "Open to opportunities"
+};`;
 
-  const { displayedLines, isComplete } = useTypingAnimation(codeLines, 30, 300);
+  const { displayedText, isComplete } = useTypingAnimation(codeText, 20, 500);
   const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
@@ -76,20 +60,29 @@ const Hero = () => {
     return () => clearInterval(cursorInterval);
   }, []);
 
+  // Syntax highlight the displayed text
+  const highlightCode = (code: string) => {
+    return code
+      .replace(/(const)/g, '<span class="text-primary/80">$1</span>')
+      .replace(/(developer)/g, '<span class="text-foreground">$1</span>')
+      .replace(/(name|role|skills|experience|education|status):/g, '<span class="text-primary/70">$1</span>:')
+      .replace(/"([^"]+)"/g, '<span class="text-green-400/90">"$1"</span>');
+  };
+
   return (
-    <section className="min-h-screen pt-24 pb-16 relative overflow-hidden">
+    <section className="min-h-screen pt-20 pb-8 relative overflow-hidden">
       {/* Grid Background */}
       <div className="absolute inset-0 grid-background pointer-events-none" />
       
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background pointer-events-none" />
 
-      <div className="container max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <div className="container max-w-7xl mx-auto px-4 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-6 items-center">
           {/* Left Content */}
           <div className="text-left">
             {/* Availability Badge - Green Attractive */}
-            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-green-500/10 border border-green-500/30 mb-8 shadow-lg shadow-green-500/5">
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-green-500/10 border border-green-500/30 mb-6 shadow-lg shadow-green-500/5">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
@@ -98,12 +91,12 @@ const Hero = () => {
             </div>
 
             {/* Greeting */}
-            <p className="text-2xl md:text-3xl text-muted-foreground font-light mb-4">
+            <p className="text-2xl md:text-3xl text-muted-foreground font-light mb-3">
               Hi, I'm
             </p>
 
             {/* Name */}
-            <h1 className="text-5xl sm:text-6xl md:text-7xl font-display font-bold mb-6 leading-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl font-display font-bold mb-4 leading-tight">
               <span className="text-gradient inline-block">Aravind</span>
               <br />
               <span className="text-foreground inline-block">Ganteda</span>
@@ -115,39 +108,20 @@ const Hero = () => {
             </h2>
 
             {/* Specialty */}
-            <p className="text-primary font-medium text-lg mb-6">
+            <p className="text-primary font-medium text-lg mb-4">
               Scalable Web Solutions Specialist
             </p>
 
             {/* Description */}
-            <p className="text-muted-foreground text-base md:text-lg max-w-xl mb-8 leading-relaxed">
-              B.Tech CSE student at RGUKT with 9.4 CGPA. Experienced in building scalable web applications 
+            <p className="text-muted-foreground text-base md:text-lg max-w-xl mb-6 leading-relaxed">
+              B.Tech CSE student at RGUKT with excellent academic record. Experienced in building scalable web applications 
               with React, Node.js, and Django. Former Software Engineer Intern at Gridlex.
             </p>
 
-            {/* Tech Stack */}
-            <div className="mb-8">
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">Working With</p>
-              <div className="flex flex-wrap gap-2">
-                {techStack.map((tech) => (
-                  <span
-                    key={tech.name}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-muted/60 border border-border text-sm text-muted-foreground hover:text-foreground hover:border-primary/30 transition-colors cursor-default"
-                  >
-                    <span className="text-sm">{tech.icon}</span>
-                    {tech.name}
-                  </span>
-                ))}
-              </div>
-            </div>
-
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-3 mb-8">
-              <Button size="lg" className="gap-2 rounded-full px-6 shadow-lg shadow-primary/25" asChild>
-                <a href="#projects">
-                  View My Work
-                  <ExternalLink className="w-4 h-4" />
-                </a>
+            <div className="flex flex-col sm:flex-row gap-3 mb-6">
+              <Button size="lg" className="gap-2 rounded-full px-6 shadow-lg shadow-primary/25">
+                View My Work
               </Button>
               <Button variant="outline" size="lg" className="gap-2 rounded-full px-6 hover:bg-primary/5" asChild>
                 <a href="#contact">
@@ -183,8 +157,8 @@ const Hero = () => {
           </div>
 
           {/* Right Content - Code Block & Stats */}
-          <div className="relative lg:pl-8">
-            {/* Code Block with Typing Animation */}
+          <div className="relative lg:pl-6">
+            {/* Code Block with Letter by Letter Typing Animation */}
             <div className="relative bg-card/80 backdrop-blur-sm rounded-2xl border border-border shadow-2xl shadow-primary/5 overflow-hidden">
               {/* Window Header */}
               <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/30">
@@ -197,85 +171,16 @@ const Hero = () => {
               </div>
 
               {/* Code Content with Typing Animation */}
-              <div className="p-6 font-mono text-sm min-h-[280px]">
-                <pre className="text-muted-foreground leading-relaxed">
-                  <code>
-                    {displayedLines.map((line, index) => (
-                      <div key={index} className="whitespace-pre">
-                        {line.includes('const developer') && (
-                          <>
-                            <span className="text-primary/80">const</span>{" "}
-                            <span className="text-foreground">developer</span>{" "}
-                            <span className="text-muted-foreground">=</span>{" "}
-                            <span className="text-muted-foreground">{"{"}</span>
-                          </>
-                        )}
-                        {line.includes('name:') && (
-                          <>
-                            {"  "}<span className="text-primary/70">name</span>
-                            <span className="text-muted-foreground">:</span>{" "}
-                            <span className="text-green-400/90">"Aravind Ganteda"</span>
-                            <span className="text-muted-foreground">,</span>
-                          </>
-                        )}
-                        {line.includes('role:') && (
-                          <>
-                            {"  "}<span className="text-primary/70">role</span>
-                            <span className="text-muted-foreground">:</span>{" "}
-                            <span className="text-green-400/90">"Full-Stack Developer"</span>
-                            <span className="text-muted-foreground">,</span>
-                          </>
-                        )}
-                        {line.includes('skills:') && (
-                          <>
-                            {"  "}<span className="text-primary/70">skills</span>
-                            <span className="text-muted-foreground">:</span>{" "}
-                            <span className="text-muted-foreground">[</span>
-                            <span className="text-green-400/90">"React"</span>
-                            <span className="text-muted-foreground">,</span>{" "}
-                            <span className="text-green-400/90">"Node.js"</span>
-                            <span className="text-muted-foreground">,</span>{" "}
-                            <span className="text-green-400/90">"TypeScript"</span>
-                            <span className="text-muted-foreground">],</span>
-                          </>
-                        )}
-                        {line.includes('experience:') && (
-                          <>
-                            {"  "}<span className="text-primary/70">experience</span>
-                            <span className="text-muted-foreground">:</span>{" "}
-                            <span className="text-green-400/90">"Gridlex - Software Engineer"</span>
-                            <span className="text-muted-foreground">,</span>
-                          </>
-                        )}
-                        {line.includes('education:') && (
-                          <>
-                            {"  "}<span className="text-primary/70">education</span>
-                            <span className="text-muted-foreground">:</span>{" "}
-                            <span className="text-green-400/90">"B.Tech CSE - CGPA: 9.4/10"</span>
-                            <span className="text-muted-foreground">,</span>
-                          </>
-                        )}
-                        {line.includes('status:') && (
-                          <>
-                            {"  "}<span className="text-primary/70">status</span>
-                            <span className="text-muted-foreground">:</span>{" "}
-                            <span className="text-green-400/90">"Open to opportunities"</span>
-                          </>
-                        )}
-                        {line === '};' && (
-                          <span className="text-muted-foreground">{"};"}</span>
-                        )}
-                      </div>
-                    ))}
-                    {/* Blinking Cursor */}
-                    <span className={`text-primary ${showCursor ? 'opacity-100' : 'opacity-0'}`}>|</span>
-                  </code>
+              <div className="p-6 font-mono text-sm min-h-[260px]">
+                <pre className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
+                  <code dangerouslySetInnerHTML={{ __html: highlightCode(displayedText) }} />
+                  <span className={`text-primary ${showCursor ? 'opacity-100' : 'opacity-0'}`}>|</span>
                 </pre>
               </div>
             </div>
 
             {/* Stats */}
-            <div className="flex justify-center gap-8 mt-8">
+            <div className="flex justify-center gap-8 mt-6">
               {stats.map((stat) => (
                 <div key={stat.label} className="text-center">
                   <div className="text-3xl md:text-4xl font-display font-bold text-foreground mb-1">
@@ -288,11 +193,11 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Scroll Indicator - Positioned higher */}
-        <div className="flex flex-col items-center mt-8">
-          <a href="#about" className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors group">
+        {/* Scroll Indicator - Positioned higher with faster animation */}
+        <div className="flex flex-col items-center mt-4">
+          <a href="#about" className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors group">
             <span className="text-sm font-medium">Discover More</span>
-            <ArrowDown className="w-5 h-5 animate-bounce" />
+            <ArrowDown className="w-5 h-5 animate-[bounce_0.8s_infinite]" />
           </a>
         </div>
       </div>
