@@ -24,9 +24,31 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Initialize theme from localStorage or system preference
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+      setIsDark(true);
+      document.documentElement.classList.add('dark');
+    } else {
+      setIsDark(false);
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
   const toggleTheme = () => {
-    setIsDark(!isDark);
-    document.documentElement.classList.toggle('dark');
+    const newIsDark = !isDark;
+    setIsDark(newIsDark);
+    
+    if (newIsDark) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
   };
 
   return (
@@ -35,7 +57,7 @@ const Navbar = () => {
         isScrolled ? "bg-background/90 backdrop-blur-xl border-b border-border shadow-sm" : "bg-background/50 backdrop-blur-sm"
       }`}
     >
-      <nav className="container max-w-6xl mx-auto px-6 py-4">
+      <nav className="container max-w-7xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group">
@@ -63,7 +85,7 @@ const Navbar = () => {
           {/* Right Side */}
           <div className="hidden lg:flex items-center gap-3">
             <Button variant="outline" size="sm" className="gap-2 rounded-full" asChild>
-              <a href="/resume.pdf" download>
+              <a href="/resume.pdf" download="Aravind_Ganteda_Resume.pdf">
                 <Download className="w-4 h-4" />
                 Resume
               </a>
@@ -71,6 +93,7 @@ const Navbar = () => {
             <button
               onClick={toggleTheme}
               className="p-2.5 rounded-full hover:bg-muted/50 transition-colors text-muted-foreground hover:text-foreground"
+              aria-label="Toggle theme"
             >
               {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
@@ -101,7 +124,7 @@ const Navbar = () => {
               ))}
               <div className="flex items-center gap-3 mt-4 pt-4 border-t border-border">
                 <Button variant="outline" size="sm" className="gap-2 flex-1" asChild>
-                  <a href="/resume.pdf" download onClick={() => setIsMobileMenuOpen(false)}>
+                  <a href="/resume.pdf" download="Aravind_Ganteda_Resume.pdf" onClick={() => setIsMobileMenuOpen(false)}>
                     <Download className="w-4 h-4" />
                     Resume
                   </a>
@@ -109,6 +132,7 @@ const Navbar = () => {
                 <button
                   onClick={toggleTheme}
                   className="p-2.5 rounded-lg hover:bg-muted/50 transition-colors"
+                  aria-label="Toggle theme"
                 >
                   {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                 </button>
