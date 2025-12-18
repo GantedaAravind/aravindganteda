@@ -9,39 +9,27 @@ const stats = [
 ];
 
 // Letter by letter typing animation hook
-const useTypingAnimation = (text: string, typingSpeed = 25, startDelay = 0) => {
-  const [displayedText, setDisplayedText] = useState("");
+const useTypingAnimation = (typingSpeed = 30, startDelay = 500) => {
+  const [displayedLines, setDisplayedLines] = useState<string[]>([]);
   const [isComplete, setIsComplete] = useState(false);
 
+  const codeLines = [
+    { text: 'const ', className: 'text-primary/80' },
+    { text: 'developer', className: 'text-foreground' },
+    { text: ' = {', className: 'text-muted-foreground' },
+  ];
+
+  const dataLines = [
+    { key: 'name', value: '"Aravind Ganteda"' },
+    { key: 'role', value: '"Full-Stack Developer"' },
+    { key: 'skills', value: '["React", "Node.js", "TypeScript"]' },
+    { key: 'experience', value: '"Gridlex - Software Engineer"' },
+    { key: 'education', value: '"B.Tech CSE - RGUKT"' },
+    { key: 'status', value: '"Open to opportunities"' },
+  ];
+
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    
-    const startTyping = () => {
-      let currentIndex = 0;
-      
-      const typeNextChar = () => {
-        if (currentIndex < text.length) {
-          setDisplayedText(text.slice(0, currentIndex + 1));
-          currentIndex++;
-          timeout = setTimeout(typeNextChar, typingSpeed);
-        } else {
-          setIsComplete(true);
-        }
-      };
-      
-      typeNextChar();
-    };
-    
-    timeout = setTimeout(startTyping, startDelay);
-    
-    return () => clearTimeout(timeout);
-  }, [text, typingSpeed, startDelay]);
-
-  return { displayedText, isComplete };
-};
-
-const Hero = () => {
-  const codeText = `const developer = {
+    const fullCode = `const developer = {
   name: "Aravind Ganteda",
   role: "Full-Stack Developer",
   skills: ["React", "Node.js", "TypeScript"],
@@ -50,7 +38,51 @@ const Hero = () => {
   status: "Open to opportunities"
 };`;
 
-  const { displayedText, isComplete } = useTypingAnimation(codeText, 20, 500);
+    let currentIndex = 0;
+    let timeout: NodeJS.Timeout;
+
+    const typeNextChar = () => {
+      if (currentIndex <= fullCode.length) {
+        const currentText = fullCode.slice(0, currentIndex);
+        setDisplayedLines(currentText.split('\n'));
+        currentIndex++;
+        timeout = setTimeout(typeNextChar, typingSpeed);
+      } else {
+        setIsComplete(true);
+      }
+    };
+
+    timeout = setTimeout(typeNextChar, startDelay);
+
+    return () => clearTimeout(timeout);
+  }, [typingSpeed, startDelay]);
+
+  return { displayedLines, isComplete };
+};
+
+// Syntax highlighter component
+const SyntaxHighlightedLine = ({ line }: { line: string }) => {
+  // Highlight const keyword
+  let highlighted = line.replace(/^(const)/, '<span class="text-primary/80">$1</span>');
+  
+  // Highlight developer variable
+  highlighted = highlighted.replace(/(developer)/, '<span class="text-foreground font-semibold">$1</span>');
+  
+  // Highlight property keys
+  highlighted = highlighted.replace(/(\s+)(name|role|skills|experience|education|status)(:)/g, 
+    '$1<span class="text-primary/70">$2</span><span class="text-muted-foreground">$3</span>');
+  
+  // Highlight string values
+  highlighted = highlighted.replace(/"([^"]+)"/g, '<span class="text-green-400">"$1"</span>');
+  
+  // Highlight brackets and braces
+  highlighted = highlighted.replace(/(\[|\]|\{|\})/g, '<span class="text-muted-foreground">$1</span>');
+  
+  return <span dangerouslySetInnerHTML={{ __html: highlighted }} />;
+};
+
+const Hero = () => {
+  const { displayedLines, isComplete } = useTypingAnimation(25, 500);
   const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
@@ -60,17 +92,8 @@ const Hero = () => {
     return () => clearInterval(cursorInterval);
   }, []);
 
-  // Syntax highlight the displayed text
-  const highlightCode = (code: string) => {
-    return code
-      .replace(/(const)/g, '<span class="text-primary/80">$1</span>')
-      .replace(/(developer)/g, '<span class="text-foreground">$1</span>')
-      .replace(/(name|role|skills|experience|education|status):/g, '<span class="text-primary/70">$1</span>:')
-      .replace(/"([^"]+)"/g, '<span class="text-green-400/90">"$1"</span>');
-  };
-
   return (
-    <section className="min-h-screen pt-20 pb-8 relative overflow-hidden">
+    <section className="min-h-screen pt-28 pb-8 relative overflow-hidden">
       {/* Grid Background */}
       <div className="absolute inset-0 grid-background pointer-events-none" />
       
@@ -112,16 +135,28 @@ const Hero = () => {
               Scalable Web Solutions Specialist
             </p>
 
-            {/* Description */}
-            <p className="text-muted-foreground text-base md:text-lg max-w-xl mb-6 leading-relaxed">
-              B.Tech CSE student at RGUKT with excellent academic record. Experienced in building scalable web applications 
-              with React, Node.js, and Django. Former Software Engineer Intern at Gridlex.
-            </p>
+            {/* Description - Made Attractive */}
+            <div className="text-muted-foreground text-base md:text-lg max-w-xl mb-6 leading-relaxed space-y-2">
+              <p>
+                <span className="text-foreground font-medium">B.Tech CSE</span> student at{" "}
+                <span className="text-primary font-medium">RGUKT</span> with an excellent academic record.
+              </p>
+              <p>
+                Building <span className="text-foreground font-medium">scalable web applications</span> with{" "}
+                <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-md font-medium">React</span>,{" "}
+                <span className="bg-green-500/10 text-green-500 px-2 py-0.5 rounded-md font-medium">Node.js</span>, and{" "}
+                <span className="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-md font-medium">Django</span>.
+              </p>
+              <p>
+                Former <span className="text-foreground font-medium">Software Engineer Intern</span> at{" "}
+                <span className="text-primary font-semibold">Gridlex</span>.
+              </p>
+            </div>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 mb-6">
-              <Button size="lg" className="gap-2 rounded-full px-6 shadow-lg shadow-primary/25">
-                View My Work
+              <Button size="lg" className="gap-2 rounded-full px-6 shadow-lg shadow-primary/25" asChild>
+                <a href="#projects">View My Work</a>
               </Button>
               <Button variant="outline" size="lg" className="gap-2 rounded-full px-6 hover:bg-primary/5" asChild>
                 <a href="#contact">
@@ -172,9 +207,15 @@ const Hero = () => {
 
               {/* Code Content with Typing Animation */}
               <div className="p-6 font-mono text-sm min-h-[260px]">
-                <pre className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
-                  <code dangerouslySetInnerHTML={{ __html: highlightCode(displayedText) }} />
-                  <span className={`text-primary ${showCursor ? 'opacity-100' : 'opacity-0'}`}>|</span>
+                <pre className="text-muted-foreground leading-relaxed">
+                  {displayedLines.map((line, index) => (
+                    <div key={index}>
+                      <SyntaxHighlightedLine line={line} />
+                      {index === displayedLines.length - 1 && (
+                        <span className={`text-primary ml-0.5 ${showCursor ? 'opacity-100' : 'opacity-0'}`}>|</span>
+                      )}
+                    </div>
+                  ))}
                 </pre>
               </div>
             </div>
@@ -194,10 +235,10 @@ const Hero = () => {
         </div>
 
         {/* Scroll Indicator - Positioned higher with faster animation */}
-        <div className="flex flex-col items-center mt-4">
+        <div className="flex flex-col items-center mt-2">
           <a href="#about" className="flex flex-col items-center gap-1 text-muted-foreground hover:text-primary transition-colors group">
             <span className="text-sm font-medium">Discover More</span>
-            <ArrowDown className="w-5 h-5 animate-[bounce_0.8s_infinite]" />
+            <ArrowDown className="w-5 h-5 animate-[bounce_0.6s_infinite]" />
           </a>
         </div>
       </div>
