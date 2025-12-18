@@ -186,24 +186,28 @@ const Hero = () => {
 
             {/* Specialty */}
             <p className="text-primary font-medium text-lg mb-4">
-              Scalable Web Solutions Specialist
+              Performance-Driven • User-Centric • Clean Code Advocate
             </p>
 
-            {/* Description - Made Attractive */}
-            <div className="text-muted-foreground text-base md:text-lg max-w-xl mb-6 leading-relaxed space-y-2">
-              <p>
-                <span className="text-foreground font-medium">B.Tech CSE</span> student at{" "}
-                <span className="text-primary font-medium">RGUKT</span> with an excellent academic record.
+            {/* Description - Professional & Engaging */}
+            <div className="text-muted-foreground text-base md:text-lg max-w-xl mb-6 leading-relaxed">
+              <p className="mb-3">
+                Full-Stack Developer specializing in building{" "}
+                <span className="text-foreground font-medium">performant, scalable web applications</span> with{" "}
+                <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-md font-medium">React</span> and{" "}
+                <span className="bg-green-500/10 text-green-500 px-2 py-0.5 rounded-md font-medium">Node.js</span>.
+              </p>
+              <p className="mb-3">
+                Currently engineering solutions at{" "}
+                <span className="text-primary font-semibold">Gridlex</span> while pursuing{" "}
+                <span className="text-foreground font-medium">Computer Science</span> at{" "}
+                <span className="text-primary font-medium">RGUKT</span>{" "}
+                <span className="text-muted-foreground/80">(9.4 CGPA)</span>.
               </p>
               <p>
-                Building <span className="text-foreground font-medium">scalable web applications</span> with{" "}
-                <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-md font-medium">React</span>,{" "}
-                <span className="bg-green-500/10 text-green-500 px-2 py-0.5 rounded-md font-medium">Node.js</span>, and{" "}
-                <span className="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-md font-medium">Django</span>.
-              </p>
-              <p>
-                Former <span className="text-foreground font-medium">Software Engineer Intern</span> at{" "}
-                <span className="text-primary font-semibold">Gridlex</span>.
+                Passionate about crafting{" "}
+                <span className="text-foreground font-medium">seamless user experiences</span> through clean code,{" "}
+                <span className="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-md font-medium">optimization techniques</span>, and modern web technologies.
               </p>
             </div>
 
