@@ -10,23 +10,8 @@ const stats = [
 
 // Letter by letter typing animation hook
 const useTypingAnimation = (typingSpeed = 30, startDelay = 500) => {
-  const [displayedLines, setDisplayedLines] = useState<string[]>([]);
+  const [displayedText, setDisplayedText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
-
-  const codeLines = [
-    { text: 'const ', className: 'text-primary/80' },
-    { text: 'developer', className: 'text-foreground' },
-    { text: ' = {', className: 'text-muted-foreground' },
-  ];
-
-  const dataLines = [
-    { key: 'name', value: '"Aravind Ganteda"' },
-    { key: 'role', value: '"Full-Stack Developer"' },
-    { key: 'skills', value: '["React", "Node.js", "TypeScript"]' },
-    { key: 'experience', value: '"Gridlex - Software Engineer"' },
-    { key: 'education', value: '"B.Tech CSE - RGUKT"' },
-    { key: 'status', value: '"Open to opportunities"' },
-  ];
 
   useEffect(() => {
     const fullCode = `const developer = {
@@ -43,8 +28,7 @@ const useTypingAnimation = (typingSpeed = 30, startDelay = 500) => {
 
     const typeNextChar = () => {
       if (currentIndex <= fullCode.length) {
-        const currentText = fullCode.slice(0, currentIndex);
-        setDisplayedLines(currentText.split('\n'));
+        setDisplayedText(fullCode.slice(0, currentIndex));
         currentIndex++;
         timeout = setTimeout(typeNextChar, typingSpeed);
       } else {
@@ -57,32 +41,102 @@ const useTypingAnimation = (typingSpeed = 30, startDelay = 500) => {
     return () => clearTimeout(timeout);
   }, [typingSpeed, startDelay]);
 
-  return { displayedLines, isComplete };
+  return { displayedText, isComplete };
 };
 
-// Syntax highlighter component
-const SyntaxHighlightedLine = ({ line }: { line: string }) => {
-  // Highlight const keyword
-  let highlighted = line.replace(/^(const)/, '<span class="text-primary/80">$1</span>');
-  
-  // Highlight developer variable
-  highlighted = highlighted.replace(/(developer)/, '<span class="text-foreground font-semibold">$1</span>');
-  
-  // Highlight property keys
-  highlighted = highlighted.replace(/(\s+)(name|role|skills|experience|education|status)(:)/g, 
-    '$1<span class="text-primary/70">$2</span><span class="text-muted-foreground">$3</span>');
-  
-  // Highlight string values
-  highlighted = highlighted.replace(/"([^"]+)"/g, '<span class="text-green-400">"$1"</span>');
-  
-  // Highlight brackets and braces
-  highlighted = highlighted.replace(/(\[|\]|\{|\})/g, '<span class="text-muted-foreground">$1</span>');
-  
-  return <span dangerouslySetInnerHTML={{ __html: highlighted }} />;
+// Syntax highlighter - renders proper React elements
+const SyntaxHighlightedCode = ({ code, showCursor }: { code: string; showCursor: boolean }) => {
+  const renderHighlightedCode = () => {
+    const elements: React.ReactNode[] = [];
+    let i = 0;
+    let key = 0;
+
+    while (i < code.length) {
+      // Check for 'const' keyword
+      if (code.slice(i, i + 5) === 'const') {
+        elements.push(<span key={key++} className="text-purple-400">const</span>);
+        i += 5;
+        continue;
+      }
+
+      // Check for 'developer' variable name
+      if (code.slice(i, i + 9) === 'developer') {
+        elements.push(<span key={key++} className="text-blue-400">developer</span>);
+        i += 9;
+        continue;
+      }
+
+      // Check for property keys
+      const keyMatch = code.slice(i).match(/^(name|role|skills|experience|education|status)(?=:)/);
+      if (keyMatch) {
+        elements.push(<span key={key++} className="text-cyan-400">{keyMatch[1]}</span>);
+        i += keyMatch[1].length;
+        continue;
+      }
+
+      // Check for strings (double quotes)
+      if (code[i] === '"') {
+        let j = i + 1;
+        while (j < code.length && code[j] !== '"') j++;
+        const str = code.slice(i, j + 1);
+        elements.push(<span key={key++} className="text-green-400">{str}</span>);
+        i = j + 1;
+        continue;
+      }
+
+      // Check for brackets and braces
+      if ('[]{}'.includes(code[i])) {
+        elements.push(<span key={key++} className="text-yellow-500">{code[i]}</span>);
+        i++;
+        continue;
+      }
+
+      // Check for = sign
+      if (code[i] === '=') {
+        elements.push(<span key={key++} className="text-pink-400">=</span>);
+        i++;
+        continue;
+      }
+
+      // Check for colon
+      if (code[i] === ':') {
+        elements.push(<span key={key++} className="text-muted-foreground">:</span>);
+        i++;
+        continue;
+      }
+
+      // Check for semicolon
+      if (code[i] === ';') {
+        elements.push(<span key={key++} className="text-muted-foreground">;</span>);
+        i++;
+        continue;
+      }
+
+      // Check for comma
+      if (code[i] === ',') {
+        elements.push(<span key={key++} className="text-muted-foreground">,</span>);
+        i++;
+        continue;
+      }
+
+      // Regular character (whitespace or other)
+      elements.push(<span key={key++} className="text-foreground">{code[i]}</span>);
+      i++;
+    }
+
+    // Add cursor at the end
+    elements.push(
+      <span key={key++} className={`text-primary ${showCursor ? 'opacity-100' : 'opacity-0'}`}>|</span>
+    );
+
+    return elements;
+  };
+
+  return <>{renderHighlightedCode()}</>;
 };
 
 const Hero = () => {
-  const { displayedLines, isComplete } = useTypingAnimation(25, 500);
+  const { displayedText, isComplete } = useTypingAnimation(25, 500);
   const [showCursor, setShowCursor] = useState(true);
 
   useEffect(() => {
@@ -205,17 +259,9 @@ const Hero = () => {
                 <span className="text-xs text-muted-foreground font-mono ml-2">developer.js</span>
               </div>
 
-              {/* Code Content with Typing Animation */}
               <div className="p-6 font-mono text-sm min-h-[260px]">
-                <pre className="text-muted-foreground leading-relaxed">
-                  {displayedLines.map((line, index) => (
-                    <div key={index}>
-                      <SyntaxHighlightedLine line={line} />
-                      {index === displayedLines.length - 1 && (
-                        <span className={`text-primary ml-0.5 ${showCursor ? 'opacity-100' : 'opacity-0'}`}>|</span>
-                      )}
-                    </div>
-                  ))}
+                <pre className="leading-relaxed whitespace-pre-wrap">
+                  <SyntaxHighlightedCode code={displayedText} showCursor={showCursor} />
                 </pre>
               </div>
             </div>
