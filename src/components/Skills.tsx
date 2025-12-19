@@ -1,79 +1,114 @@
-const skills = [
-  { name: "React / Next.js", level: 95 },
-  { name: "TypeScript", level: 90 },
-  { name: "Node.js", level: 85 },
-  { name: "Python", level: 80 },
-  { name: "PostgreSQL", level: 85 },
-  { name: "AWS / Cloud", level: 75 },
+import { Code, Layout, Server, Database, TestTube, GitBranch, Brain, Zap } from "lucide-react";
+
+const skillCategories = [
+  {
+    title: "Programming Languages",
+    icon: Code,
+    skills: ["JavaScript", "TypeScript", "Python", "Java", "C", "C++", "HTML", "CSS"],
+  },
+  {
+    title: "Frontend Development",
+    icon: Layout,
+    skills: ["ReactJS", "React Router", "Redux Toolkit", "Tailwind CSS", "DaisyUI", "Bootstrap", "Responsive Design"],
+  },
+  {
+    title: "Backend Development",
+    icon: Server,
+    skills: ["Node.js", "Express.js", "Django", "RESTful APIs", "JWT Auth", "Postman"],
+  },
+  {
+    title: "Database Management",
+    icon: Database,
+    skills: ["MongoDB", "MySQL", "PostgreSQL"],
+  },
+  {
+    title: "Testing & QA",
+    icon: TestTube,
+    skills: ["Jest", "Vitest", "Unit Testing", "Integration Testing"],
+  },
+  {
+    title: "Tools & Version Control",
+    icon: GitBranch,
+    skills: ["Git", "GitHub", "VS Code", "Terminal"],
+  },
 ];
 
-const tools = [
-  "Git", "Docker", "Figma", "VS Code", "Tailwind CSS", "GraphQL", 
-  "Redis", "MongoDB", "Jest", "Cypress", "GitHub Actions", "Vercel"
+const highlights = [
+  { icon: Brain, label: "400+ DSA Problems", desc: "LeetCode & GeeksforGeeks" },
+  { icon: Zap, label: "Performance Expert", desc: "40-60% load time reduction" },
 ];
 
 const Skills = () => {
   return (
     <section id="skills" className="py-24 px-6 bg-secondary/30">
-      <div className="container max-w-5xl">
+      <div className="container max-w-6xl">
         <div className="text-center mb-16">
           <p className="text-primary font-display font-medium tracking-wider uppercase text-sm mb-4">
-            Skills & Tools
+            Skills & Expertise
           </p>
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
             Technologies I Work With
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            I'm constantly learning and expanding my toolkit to deliver the best solutions.
+            Constantly learning and expanding my toolkit to deliver the best solutions.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Technical Skills */}
-          <div>
-            <h3 className="text-xl font-display font-semibold mb-6">Technical Skills</h3>
-            <div className="space-y-5">
-              {skills.map((skill) => (
-                <div key={skill.name}>
-                  <div className="flex justify-between mb-2">
-                    <span className="font-medium">{skill.name}</span>
-                    <span className="text-primary">{skill.level}%</span>
-                  </div>
-                  <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-primary to-primary/70 rounded-full transition-all duration-1000"
-                      style={{ width: `${skill.level}%` }}
-                    />
-                  </div>
-                </div>
-              ))}
+        {/* Highlights */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {highlights.map((item) => (
+            <div
+              key={item.label}
+              className="flex items-center gap-3 px-5 py-3 card-glass rounded-xl border border-primary/20 bg-primary/5"
+            >
+              <item.icon className="w-5 h-5 text-primary" />
+              <div>
+                <p className="font-semibold text-foreground">{item.label}</p>
+                <p className="text-xs text-muted-foreground">{item.desc}</p>
+              </div>
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* Tools & Technologies */}
-          <div>
-            <h3 className="text-xl font-display font-semibold mb-6">Tools & Technologies</h3>
-            <div className="flex flex-wrap gap-3">
-              {tools.map((tool) => (
-                <span 
-                  key={tool}
-                  className="px-4 py-2 card-glass rounded-lg text-sm font-medium hover:border-primary/50 transition-colors duration-300 cursor-default"
-                >
-                  {tool}
-                </span>
-              ))}
-            </div>
-
-            {/* Soft Skills */}
-            <h3 className="text-xl font-display font-semibold mt-10 mb-6">Soft Skills</h3>
-            <div className="grid grid-cols-2 gap-4">
-              {["Problem Solving", "Team Collaboration", "Communication", "Leadership"].map((skill) => (
-                <div key={skill} className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-primary" />
-                  <span className="text-muted-foreground">{skill}</span>
+        {/* Skills Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {skillCategories.map((category) => (
+            <div
+              key={category.title}
+              className="card-glass rounded-xl p-6 hover:border-primary/50 transition-all duration-300 group"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                  <category.icon className="w-5 h-5" />
                 </div>
-              ))}
+                <h3 className="font-display font-semibold text-lg">{category.title}</h3>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {category.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="px-3 py-1.5 text-sm bg-secondary/50 rounded-lg text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors duration-200 cursor-default"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
             </div>
+          ))}
+        </div>
+
+        {/* Currently Learning */}
+        <div className="mt-12 text-center">
+          <p className="text-sm text-muted-foreground mb-3">Currently Exploring</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {["Next.js", "GraphQL", "AWS", "Docker", "System Design"].map((tech) => (
+              <span
+                key={tech}
+                className="px-4 py-2 text-sm border border-dashed border-primary/30 rounded-lg text-primary/80 hover:border-primary hover:text-primary transition-colors duration-200"
+              >
+                {tech}
+              </span>
+            ))}
           </div>
         </div>
       </div>
