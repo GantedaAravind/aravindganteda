@@ -1,16 +1,17 @@
-import { Briefcase, GraduationCap, Award, ExternalLink } from "lucide-react";
+import { Briefcase, GraduationCap, Award, MapPin, Calendar, TrendingUp } from "lucide-react";
 
 const experiences = [
   {
     title: "Software Engineer Intern",
     company: "Gridlex",
     period: "Aug 2025 - Present",
+    location: "Remote",
     tech: ["React", "Django", "PostgreSQL"],
     achievements: [
-      "Engineered dynamic card view system with 4+ configurable properties supporting recursive group hierarchies and real-time UI updates",
-      "Optimized email notification system with role-based filtering, eliminating 100% of notifications to inactive users",
-      "Resolved critical UI bugs in state management, reducing selection errors by 40%",
-      "Implemented pagination architecture, expanding accessibility from 5 to unlimited campaigns and improving load performance by 60%",
+      { text: "Engineered dynamic card view system with 4+ configurable properties supporting recursive group hierarchies", metric: null },
+      { text: "Optimized email notification system with role-based filtering", metric: "100%" },
+      { text: "Resolved critical UI bugs in state management, reducing selection errors", metric: "40%" },
+      { text: "Implemented pagination architecture, improving page load performance", metric: "60%" },
     ],
   },
 ];
@@ -20,20 +21,23 @@ const education = [
     title: "B.Tech in Computer Science",
     institution: "RGUKT Nuzvid",
     period: "2022 - 2026",
-    grade: "9.4 CGPA",
-    coursework: ["Data Structures & Algorithms", "Web Development", "OOP", "Machine Learning", "Databases"],
+    grade: "9.4",
+    gradeLabel: "CGPA",
+    coursework: ["DSA", "Web Dev", "OOP", "ML", "Databases"],
   },
   {
     title: "Pre-University Course",
     institution: "RGUKT Nuzvid",
     period: "2020 - 2022",
-    grade: "9.93 CGPA",
+    grade: "9.93",
+    gradeLabel: "CGPA",
   },
   {
     title: "SSC Board Examination",
     institution: "Z.P.H. School, Garugubilli",
     period: "2019 - 2020",
-    grade: "594/600 (99%)",
+    grade: "99%",
+    gradeLabel: "594/600",
   },
 ];
 
@@ -42,19 +46,25 @@ const certifications = [
     title: "MERN Stack Development",
     issuer: "Udemy",
     date: "Aug 2023",
-    description: "Full-stack development with MongoDB, Express.js, React.js, and Node.js",
+    icon: "🎓",
   },
   {
-    title: "400+ DSA Problems Solved",
-    issuer: "LeetCode & GeeksforGeeks",
-    description: "Arrays, Trees, Graphs, DP, Sliding Window techniques",
+    title: "400+ DSA Problems",
+    issuer: "LeetCode & GFG",
+    icon: "🏆",
   },
 ];
 
 const Experience = () => {
   return (
-    <section id="experience" className="py-24 px-6 bg-secondary/30">
-      <div className="container max-w-6xl">
+    <section id="experience" className="py-24 px-6 bg-secondary/30 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-50">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="container max-w-6xl relative">
         <div className="text-center mb-16">
           <p className="text-primary font-display font-medium tracking-wider uppercase text-sm mb-4">
             Background
@@ -64,83 +74,112 @@ const Experience = () => {
           </h2>
         </div>
 
-        {/* Work Experience - Full Width */}
+        {/* Work Experience - Featured Card */}
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-8">
-            <div className="p-2 rounded-lg bg-primary/10">
-              <Briefcase className="w-5 h-5 text-primary" />
+            <div className="p-2.5 rounded-xl bg-gradient-to-br from-primary to-primary/70 text-primary-foreground">
+              <Briefcase className="w-5 h-5" />
             </div>
             <h3 className="text-xl font-display font-semibold">Work Experience</h3>
           </div>
 
           {experiences.map((exp, index) => (
-            <div key={index} className="card-glass rounded-xl p-6 hover-lift">
-              <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <h4 className="text-xl font-display font-semibold">{exp.title}</h4>
-                    <span className="px-2 py-0.5 text-xs bg-green-500/10 text-green-500 rounded-full">
-                      Current
-                    </span>
+            <div
+              key={index}
+              className="relative group"
+            >
+              {/* Glow effect */}
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 to-primary/10 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="relative card-glass rounded-2xl p-6 md:p-8 border-primary/20">
+                {/* Header */}
+                <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
+                  <div>
+                    <div className="flex items-center gap-3 mb-2">
+                      <h4 className="text-2xl font-display font-bold">{exp.title}</h4>
+                      <span className="px-3 py-1 text-xs bg-green-500/10 text-green-500 rounded-full font-medium animate-pulse">
+                        Current
+                      </span>
+                    </div>
+                    <p className="text-xl text-primary font-semibold">{exp.company}</p>
+                    <div className="flex items-center gap-4 mt-2 text-sm text-muted-foreground">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-4 h-4" />
+                        {exp.period}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <MapPin className="w-4 h-4" />
+                        {exp.location}
+                      </span>
+                    </div>
                   </div>
-                  <p className="text-primary font-medium">{exp.company}</p>
+
+                  {/* Tech Stack Pills */}
+                  <div className="flex flex-wrap gap-2">
+                    {exp.tech.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-4 py-2 text-sm bg-primary/10 text-primary rounded-full font-medium border border-primary/20"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <span className="text-muted-foreground text-sm">{exp.period}</span>
-              </div>
 
-              {/* Tech Stack */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {exp.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full font-medium"
-                  >
-                    {tech}
-                  </span>
-                ))}
+                {/* Achievements Grid */}
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {exp.achievements.map((achievement, i) => (
+                    <div
+                      key={i}
+                      className="flex items-start gap-3 p-4 rounded-xl bg-secondary/50 hover:bg-secondary/80 transition-colors group/item"
+                    >
+                      <div className="p-1.5 rounded-lg bg-primary/10 text-primary mt-0.5">
+                        <TrendingUp className="w-4 h-4" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm text-foreground/90 leading-relaxed">
+                          {achievement.text}
+                        </p>
+                        {achievement.metric && (
+                          <span className="inline-block mt-2 px-2 py-0.5 text-xs font-bold bg-primary/20 text-primary rounded">
+                            {achievement.metric} improvement
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
-
-              {/* Achievements */}
-              <ul className="space-y-2">
-                {exp.achievements.map((achievement, i) => (
-                  <li key={i} className="flex items-start gap-2 text-muted-foreground text-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <span>{achievement}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
           ))}
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Education */}
-          <div>
+        <div className="grid lg:grid-cols-5 gap-8">
+          {/* Education - 3 columns */}
+          <div className="lg:col-span-3">
             <div className="flex items-center gap-3 mb-8">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <GraduationCap className="w-5 h-5 text-primary" />
+              <div className="p-2.5 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 text-white">
+                <GraduationCap className="w-5 h-5" />
               </div>
               <h3 className="text-xl font-display font-semibold">Education</h3>
             </div>
 
-            <div className="relative">
-              <div className="absolute left-3 top-2 bottom-2 w-px bg-border" />
-
-              <div className="space-y-6">
-                {education.map((edu, index) => (
-                  <div key={index} className="relative pl-10">
-                    <div className="absolute left-0 top-2 w-6 h-6 rounded-full bg-secondary border-2 border-primary flex items-center justify-center">
-                      <div className="w-2 h-2 rounded-full bg-primary" />
-                    </div>
-
-                    <div className="card-glass rounded-xl p-5 hover-lift">
-                      <div className="flex items-start justify-between gap-2 mb-1">
-                        <span className="text-primary text-sm font-medium">{edu.period}</span>
-                        <span className="px-2 py-0.5 text-xs bg-primary/10 text-primary rounded-full font-semibold">
-                          {edu.grade}
-                        </span>
+            <div className="space-y-4">
+              {education.map((edu, index) => (
+                <div
+                  key={index}
+                  className="group card-glass rounded-xl p-5 hover:border-primary/30 transition-all duration-300"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
+                        <Calendar className="w-3.5 h-3.5" />
+                        {edu.period}
                       </div>
-                      <h4 className="text-lg font-display font-semibold">{edu.title}</h4>
+                      <h4 className="text-lg font-display font-semibold group-hover:text-primary transition-colors">
+                        {edu.title}
+                      </h4>
                       <p className="text-muted-foreground text-sm">{edu.institution}</p>
 
                       {edu.coursework && (
@@ -148,7 +187,7 @@ const Experience = () => {
                           {edu.coursework.map((course) => (
                             <span
                               key={course}
-                              className="px-2 py-0.5 text-xs bg-secondary/80 text-muted-foreground rounded"
+                              className="px-2 py-0.5 text-xs bg-secondary/80 text-muted-foreground rounded hover:bg-primary/10 hover:text-primary transition-colors"
                             >
                               {course}
                             </span>
@@ -156,34 +195,47 @@ const Experience = () => {
                         </div>
                       )}
                     </div>
+
+                    {/* Grade Badge */}
+                    <div className="text-center">
+                      <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex flex-col items-center justify-center border border-primary/20">
+                        <span className="text-xl font-display font-bold text-primary">{edu.grade}</span>
+                        <span className="text-[10px] text-muted-foreground">{edu.gradeLabel}</span>
+                      </div>
+                    </div>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Certifications */}
-          <div>
+          {/* Certifications - 2 columns */}
+          <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-8">
-              <div className="p-2 rounded-lg bg-primary/10">
-                <Award className="w-5 h-5 text-primary" />
+              <div className="p-2.5 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 text-white">
+                <Award className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-display font-semibold">Certifications & Achievements</h3>
+              <h3 className="text-xl font-display font-semibold">Achievements</h3>
             </div>
 
             <div className="space-y-4">
               {certifications.map((cert, index) => (
-                <div key={index} className="card-glass rounded-xl p-5 hover-lift">
-                  <div className="flex items-start justify-between gap-2">
+                <div
+                  key={index}
+                  className="card-glass rounded-xl p-5 hover:border-primary/30 transition-all duration-300 group"
+                >
+                  <div className="flex items-start gap-4">
+                    <span className="text-3xl">{cert.icon}</span>
                     <div>
-                      <h4 className="font-display font-semibold">{cert.title}</h4>
-                      <p className="text-primary text-sm">{cert.issuer}</p>
+                      <h4 className="font-display font-semibold group-hover:text-primary transition-colors">
+                        {cert.title}
+                      </h4>
+                      <p className="text-sm text-muted-foreground">{cert.issuer}</p>
+                      {cert.date && (
+                        <span className="inline-block mt-2 text-xs text-primary/80">{cert.date}</span>
+                      )}
                     </div>
-                    {cert.date && (
-                      <span className="text-muted-foreground text-xs">{cert.date}</span>
-                    )}
                   </div>
-                  <p className="text-muted-foreground text-sm mt-2">{cert.description}</p>
                 </div>
               ))}
             </div>
