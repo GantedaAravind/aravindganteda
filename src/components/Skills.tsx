@@ -31,6 +31,11 @@ const skillCategories = [
     icon: GitBranch,
     skills: ["Git", "GitHub", "VS Code", "Terminal"],
   },
+  {
+    title: "DevOps & Cloud",
+    icon: Server,
+    skills: ["Docker", "AWS", "CI/CD", "Linux"],
+  },
 ];
 
 const highlights = [
@@ -101,7 +106,7 @@ const Skills = () => {
         <div className="mt-12 text-center">
           <p className="text-sm text-muted-foreground mb-3">Currently Exploring</p>
           <div className="flex flex-wrap justify-center gap-3">
-            {["Next.js", "GraphQL", "AWS", "Docker", "Kubernetes", "System Design"].map((tech) => (
+            {["Next.js", "GraphQL", "Kubernetes", "Microservices", "System Design"].map((tech) => (
               <span
                 key={tech}
                 className="px-4 py-2 text-sm border border-dashed border-primary/30 rounded-lg text-primary/80 hover:border-primary hover:text-primary transition-colors duration-200"
