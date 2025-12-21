@@ -1,4 +1,4 @@
-import { Briefcase, GraduationCap, Award, MapPin, Calendar, TrendingUp } from "lucide-react";
+import { Briefcase, GraduationCap, Award, MapPin, Calendar, TrendingUp, School, BookOpen } from "lucide-react";
 
 const experiences = [
   {
@@ -23,6 +23,8 @@ const education = [
     period: "2022 - 2026",
     grade: "9.4",
     gradeLabel: "CGPA",
+    icon: GraduationCap,
+    iconBg: "from-primary to-primary/70",
     coursework: ["DSA", "Web Dev", "OOP", "ML", "Databases"],
   },
   {
@@ -31,6 +33,8 @@ const education = [
     period: "2020 - 2022",
     grade: "9.93",
     gradeLabel: "CGPA",
+    icon: BookOpen,
+    iconBg: "from-blue-500 to-cyan-500",
   },
   {
     title: "SSC Board Examination",
@@ -38,6 +42,8 @@ const education = [
     period: "2019 - 2020",
     grade: "99%",
     gradeLabel: "594/600",
+    icon: School,
+    iconBg: "from-green-500 to-emerald-500",
   },
 ];
 
@@ -165,47 +171,70 @@ const Experience = () => {
               <h3 className="text-xl font-display font-semibold">Education</h3>
             </div>
 
-            <div className="space-y-4">
-              {education.map((edu, index) => (
-                <div
-                  key={index}
-                  className="group card-glass rounded-xl p-5 hover:border-primary/30 transition-all duration-300"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
-                        <Calendar className="w-3.5 h-3.5" />
-                        {edu.period}
+            {/* Timeline */}
+            <div className="relative">
+              {/* Timeline Line */}
+              <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-blue-500 to-green-500 hidden md:block" />
+              
+              <div className="space-y-6">
+                {education.map((edu, index) => (
+                  <div
+                    key={index}
+                    className="group relative flex gap-6"
+                  >
+                    {/* Timeline Icon */}
+                    <div className="hidden md:flex flex-col items-center">
+                      <div className={`relative z-10 p-3 rounded-xl bg-gradient-to-br ${edu.iconBg} text-white shadow-lg`}>
+                        <edu.icon className="w-5 h-5" />
                       </div>
-                      <h4 className="text-lg font-display font-semibold group-hover:text-primary transition-colors">
-                        {edu.title}
-                      </h4>
-                      <p className="text-muted-foreground text-sm">{edu.institution}</p>
-
-                      {edu.coursework && (
-                        <div className="flex flex-wrap gap-1.5 mt-3">
-                          {edu.coursework.map((course) => (
-                            <span
-                              key={course}
-                              className="px-2 py-0.5 text-xs bg-secondary/80 text-muted-foreground rounded hover:bg-primary/10 hover:text-primary transition-colors"
-                            >
-                              {course}
-                            </span>
-                          ))}
-                        </div>
-                      )}
                     </div>
 
-                    {/* Grade Badge */}
-                    <div className="text-center">
-                      <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex flex-col items-center justify-center border border-primary/20">
-                        <span className="text-xl font-display font-bold text-primary">{edu.grade}</span>
-                        <span className="text-[10px] text-muted-foreground">{edu.gradeLabel}</span>
+                    {/* Content Card */}
+                    <div className="flex-1 card-glass rounded-xl p-5 hover:border-primary/30 transition-all duration-300 group-hover:translate-x-1">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                          {/* Mobile Icon */}
+                          <div className={`md:hidden p-2.5 rounded-lg bg-gradient-to-br ${edu.iconBg} text-white inline-flex mb-3`}>
+                            <edu.icon className="w-4 h-4" />
+                          </div>
+                          
+                          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
+                            <Calendar className="w-3.5 h-3.5" />
+                            {edu.period}
+                          </div>
+                          <h4 className="text-lg font-display font-semibold group-hover:text-primary transition-colors">
+                            {edu.title}
+                          </h4>
+                          <p className="text-muted-foreground text-sm">{edu.institution}</p>
+
+                          {edu.coursework && (
+                            <div className="flex flex-wrap gap-1.5 mt-3">
+                              {edu.coursework.map((course) => (
+                                <span
+                                  key={course}
+                                  className="px-2 py-0.5 text-xs bg-secondary/80 text-muted-foreground rounded hover:bg-primary/10 hover:text-primary transition-colors"
+                                >
+                                  {course}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Grade Badge */}
+                        <div className="text-center shrink-0">
+                          <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${edu.iconBg} p-[2px] shadow-lg`}>
+                            <div className="w-full h-full rounded-[10px] bg-background flex flex-col items-center justify-center">
+                              <span className="text-lg font-display font-bold text-foreground">{edu.grade}</span>
+                              <span className="text-[9px] text-muted-foreground">{edu.gradeLabel}</span>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 

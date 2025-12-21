@@ -147,7 +147,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="min-h-screen pt-28 pb-8 relative overflow-hidden">
+    <section className="min-h-screen pt-40 pb-8 relative overflow-hidden">
       {/* Grid Background */}
       <div className="absolute inset-0 grid-background pointer-events-none" />
       
@@ -189,27 +189,13 @@ const Hero = () => {
               Performance-Driven • User-Centric • Clean Code Advocate
             </p>
 
-            {/* Description - Professional & Engaging */}
-            <div className="text-muted-foreground text-base md:text-lg max-w-xl mb-6 leading-relaxed">
-              <p className="mb-3">
-                Full-Stack Developer specializing in building{" "}
-                <span className="text-foreground font-medium">performant, scalable web applications</span> with{" "}
-                <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-md font-medium">React</span> and{" "}
-                <span className="bg-green-500/10 text-green-500 px-2 py-0.5 rounded-md font-medium">Node.js</span>.
-              </p>
-              <p className="mb-3">
-                Currently engineering solutions at{" "}
-                <span className="text-primary font-semibold">Gridlex</span> while pursuing{" "}
-                <span className="text-foreground font-medium">Computer Science</span> at{" "}
-                <span className="text-primary font-medium">RGUKT</span>{" "}
-                <span className="text-muted-foreground/80">(9.4 CGPA)</span>.
-              </p>
-              <p>
-                Passionate about crafting{" "}
-                <span className="text-foreground font-medium">seamless user experiences</span> through clean code,{" "}
-                <span className="bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded-md font-medium">optimization techniques</span>, and modern web technologies.
-              </p>
-            </div>
+            {/* Description - Passionate & Engaging */}
+            <p className="text-muted-foreground text-lg md:text-xl max-w-xl mb-6 leading-relaxed">
+              I'm <span className="text-foreground font-medium">passionate about building web applications</span> that 
+              make a difference. I love turning complex problems into{" "}
+              <span className="text-primary font-medium">elegant, user-friendly solutions</span> and 
+              constantly pushing the boundaries of what's possible with modern technologies.
+            </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-3 mb-6">

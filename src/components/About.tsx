@@ -1,26 +1,56 @@
-import { GraduationCap, Briefcase, Code, Award } from "lucide-react";
+import { GraduationCap, Briefcase, Code, Award, Sparkles, Rocket, Target, Cpu } from "lucide-react";
 
 const About = () => {
   return (
     <section id="about" className="py-24 px-6">
       <div className="container max-w-5xl">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Image/Visual */}
+          {/* Visual - Creative Code Block */}
           <div className="relative order-2 lg:order-1">
             <div className="aspect-square rounded-2xl card-glass p-1 relative overflow-hidden">
-              <div className="w-full h-full rounded-xl bg-gradient-to-br from-primary/20 via-secondary to-primary/10 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <div className="w-40 h-40 mx-auto mb-6 rounded-full bg-primary/20 border-2 border-primary/30 flex items-center justify-center">
-                    <span className="text-5xl font-display font-bold text-primary">AG</span>
+              <div className="w-full h-full rounded-xl bg-gradient-to-br from-primary/10 via-background to-primary/5 flex items-center justify-center relative">
+                {/* Floating Elements */}
+                <div className="absolute inset-0 overflow-hidden">
+                  {/* Animated circles */}
+                  <div className="absolute top-10 left-10 w-20 h-20 rounded-full border border-primary/20 animate-pulse" />
+                  <div className="absolute bottom-20 right-8 w-16 h-16 rounded-full bg-primary/5 animate-[bounce_3s_infinite]" />
+                  <div className="absolute top-1/3 right-16 w-12 h-12 rounded-lg border border-primary/30 rotate-45 animate-[spin_10s_linear_infinite]" />
+                  
+                  {/* Tech icons floating */}
+                  <div className="absolute top-8 right-12 p-3 rounded-xl bg-primary/10 border border-primary/20 animate-[bounce_2s_infinite]">
+                    <Code className="w-5 h-5 text-primary" />
                   </div>
-                  <p className="text-foreground font-semibold text-lg">Aravind Ganteda</p>
-                  <p className="text-muted-foreground text-sm">Full-Stack Developer</p>
+                  <div className="absolute bottom-16 left-12 p-3 rounded-xl bg-green-500/10 border border-green-500/20 animate-[bounce_2.5s_infinite_0.5s]">
+                    <Rocket className="w-5 h-5 text-green-500" />
+                  </div>
+                  <div className="absolute top-1/2 left-8 p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 animate-[bounce_3s_infinite_1s]">
+                    <Target className="w-5 h-5 text-blue-500" />
+                  </div>
+                  <div className="absolute bottom-8 right-20 p-3 rounded-xl bg-orange-500/10 border border-orange-500/20 animate-[bounce_2.8s_infinite_0.3s]">
+                    <Cpu className="w-5 h-5 text-orange-500" />
+                  </div>
+                </div>
+
+                {/* Center Content */}
+                <div className="text-center p-8 relative z-10">
+                  <div className="w-32 h-32 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-2xl shadow-primary/30 relative">
+                    <span className="text-4xl font-display font-bold text-primary-foreground">AG</span>
+                    <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-yellow-500 animate-pulse" />
+                  </div>
+                  <p className="text-foreground font-semibold text-xl">Aravind Ganteda</p>
+                  <p className="text-primary font-medium">Full-Stack Developer</p>
+                  <div className="flex items-center justify-center gap-2 mt-3">
+                    <span className="px-3 py-1 text-xs bg-green-500/10 text-green-500 rounded-full font-medium flex items-center gap-1">
+                      <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                      Available for work
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
             {/* Decorative elements */}
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-primary/20 rounded-2xl -z-10" />
-            <div className="absolute -top-4 -left-4 w-16 h-16 bg-primary/10 rounded-xl -z-10" />
+            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl -z-10 blur-sm" />
+            <div className="absolute -top-4 -left-4 w-16 h-16 bg-gradient-to-br from-primary/15 to-transparent rounded-xl -z-10" />
           </div>
 
           {/* Content */}
