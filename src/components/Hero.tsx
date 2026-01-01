@@ -297,19 +297,19 @@ const Hero = () => {
             className="relative lg:pl-6"
           >
             {/* Code Block with Letter by Letter Typing Animation */}
-            <div className="relative bg-card/80 backdrop-blur-sm rounded-2xl border border-border shadow-2xl shadow-primary/5 overflow-hidden hover:border-primary/30 transition-colors duration-500">
+            <div className="relative bg-slate-900 dark:bg-card/80 backdrop-blur-sm rounded-2xl border border-slate-700 dark:border-border shadow-2xl shadow-primary/10 overflow-hidden hover:border-primary/50 dark:hover:border-primary/30 transition-colors duration-500">
               {/* Window Header */}
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/30">
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-slate-700 dark:border-border bg-slate-800/50 dark:bg-muted/30">
                 <div className="flex gap-1.5">
                   <span className="w-3 h-3 rounded-full bg-red-500/80" />
                   <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <span className="w-3 h-3 rounded-full bg-green-500/80" />
                 </div>
-                <span className="text-xs text-muted-foreground font-mono ml-2">developer.js</span>
+                <span className="text-xs text-slate-400 dark:text-muted-foreground font-mono ml-2">developer.js</span>
               </div>
 
               <div className="p-6 font-mono text-sm min-h-[260px]">
-                <pre className="leading-relaxed whitespace-pre-wrap">
+                <pre className="leading-relaxed whitespace-pre-wrap text-slate-100 dark:text-foreground">
                   <SyntaxHighlightedCode code={displayedText} showCursor={showCursor} />
                 </pre>
               </div>
