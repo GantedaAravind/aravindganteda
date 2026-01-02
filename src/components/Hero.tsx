@@ -204,37 +204,27 @@ const Hero = () => {
             </motion.div>
 
             {/* Main Heading */}
-            <div className="mb-6">
+            <div className="mb-5">
               <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="overflow-hidden"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <span className="text-lg md:text-xl text-muted-foreground font-medium tracking-wide">
+                <span className="text-sm md:text-base text-muted-foreground font-medium tracking-widest uppercase">
                   Hello, I'm
                 </span>
               </motion.div>
 
               <motion.h1
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="mt-2"
+                className="mt-3 flex flex-wrap items-baseline gap-x-4"
               >
-                <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] tracking-tight">
-                  <span className="relative inline-block">
-                    <span className="relative z-10 text-gradient">Aravind</span>
-                    {/* Underline decoration */}
-                    <motion.span 
-                      className="absolute -bottom-2 left-0 h-3 md:h-4 bg-primary/20 -z-10 rounded-sm"
-                      initial={{ width: 0 }}
-                      animate={{ width: "100%" }}
-                      transition={{ duration: 0.8, delay: 0.8 }}
-                    />
-                  </span>
+                <span className="text-4xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight text-gradient">
+                  Aravind
                 </span>
-                <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-display font-bold leading-[0.9] tracking-tight text-foreground mt-1">
+                <span className="text-4xl sm:text-5xl md:text-6xl font-display font-bold tracking-tight text-foreground">
                   Ganteda
                 </span>
               </motion.h1>
