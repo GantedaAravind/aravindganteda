@@ -159,7 +159,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="min-h-screen pt-36 pb-8 relative overflow-hidden">
+    <section className="min-h-screen pt-44 pb-8 relative overflow-hidden">
       {/* Grid Background */}
       <div className="absolute inset-0 grid-background pointer-events-none" />
       
