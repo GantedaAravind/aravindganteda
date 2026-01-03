@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Brain, Zap, Filter } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useState } from "react";
@@ -41,32 +40,32 @@ const skillCategories = [
   {
     title: "Languages",
     skills: ["JavaScript", "TypeScript", "Python", "Java", "C", "C++", "HTML", "CSS"],
-    color: "from-yellow-500 to-orange-500",
+    gradient: "from-primary to-accent",
   },
   {
     title: "Frontend",
     skills: ["ReactJS", "React Router", "Redux Toolkit", "Tailwind CSS", "Bootstrap"],
-    color: "from-blue-500 to-cyan-500",
+    gradient: "from-blue-500 to-cyan-500",
   },
   {
     title: "Backend",
     skills: ["Node.js", "Express.js", "Django"],
-    color: "from-green-500 to-emerald-500",
+    gradient: "from-green-500 to-emerald-500",
   },
   {
     title: "Database",
     skills: ["MongoDB", "MySQL", "PostgreSQL"],
-    color: "from-purple-500 to-pink-500",
+    gradient: "from-pink-500 to-rose-500",
   },
   {
     title: "Testing",
     skills: ["Jest", "Vitest"],
-    color: "from-red-500 to-rose-500",
+    gradient: "from-red-500 to-orange-500",
   },
   {
     title: "DevOps & Tools",
     skills: ["Git", "GitHub", "Docker", "AWS", "Linux", "VS Code"],
-    color: "from-indigo-500 to-purple-500",
+    gradient: "from-indigo-500 to-purple-500",
   },
 ];
 
@@ -84,60 +83,61 @@ const Skills = () => {
     : skillCategories;
 
   return (
-    <section id="skills" className="py-24 px-6 bg-secondary/30" ref={ref}>
-      <div className="container max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+    <section id="skills" className="py-24 px-6 relative overflow-hidden" ref={ref}>
+      {/* Background */}
+      <div className="absolute inset-0 bg-secondary/30" />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="floating-orb floating-orb-2 opacity-30" />
+        <div className="floating-orb floating-orb-3 opacity-30" />
+      </div>
+
+      <div className="container max-w-6xl relative">
+        <div
+          className={`text-center mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <p className="text-primary font-display font-medium tracking-wider uppercase text-sm mb-4">
             Skills & Expertise
           </p>
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            Technologies I Work With
+            Technologies I <span className="text-gradient">Work With</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Constantly learning and expanding my toolkit to deliver the best solutions.
           </p>
-        </motion.div>
+        </div>
 
         {/* Highlights */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex flex-wrap justify-center gap-4 mb-8"
+        <div
+          className={`flex flex-wrap justify-center gap-4 mb-8 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           {highlights.map((item) => (
             <div
               key={item.label}
-              className="flex items-center gap-3 px-5 py-3 card-glass rounded-xl border border-primary/20 bg-primary/5 hover:border-primary/40 transition-colors"
+              className="flex items-center gap-3 px-5 py-3 card-glass rounded-xl border-primary/20 bg-primary/5 hover:border-primary/40 instant-hover"
             >
-              <item.icon className="w-5 h-5 text-primary" />
+              <div className="p-2 rounded-lg" style={{ background: 'var(--gradient-primary)' }}>
+                <item.icon className="w-5 h-5 text-white" />
+              </div>
               <div>
                 <p className="font-semibold text-foreground">{item.label}</p>
                 <p className="text-xs text-muted-foreground">{item.desc}</p>
               </div>
             </div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Filter Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-2 mb-8"
+        <div
+          className={`flex flex-wrap justify-center gap-2 mb-8 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <button
             onClick={() => setActiveFilter(null)}
-            className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium instant-hover ${
               activeFilter === null
-                ? "bg-primary text-primary-foreground"
+                ? "text-white btn-glow"
                 : "bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground"
             }`}
+            style={activeFilter === null ? { background: 'var(--gradient-primary)' } : {}}
           >
             <Filter className="w-3.5 h-3.5" />
             All
@@ -146,44 +146,43 @@ const Skills = () => {
             <button
               key={cat.title}
               onClick={() => setActiveFilter(cat.title)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+              className={`px-4 py-2 rounded-full text-sm font-medium instant-hover ${
                 activeFilter === cat.title
-                  ? "bg-primary text-primary-foreground"
+                  ? "text-white btn-glow"
                   : "bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground"
               }`}
+              style={activeFilter === cat.title ? { background: 'var(--gradient-primary)' } : {}}
             >
               {cat.title}
             </button>
           ))}
-        </motion.div>
+        </div>
 
         {/* Skills Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCategories.map((category, catIndex) => (
-            <motion.div
+            <div
               key={category.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 * catIndex }}
-              className="group"
+              className={`group transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              style={{ transitionDelay: `${100 * catIndex}ms` }}
             >
-              <div className="card-glass rounded-xl p-6 h-full hover:border-primary/50 transition-all duration-300 group-hover:-translate-y-1">
+              <div className="card-glass rounded-xl p-6 h-full hover:border-primary/50 instant-hover hover-lift">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className={`h-1 w-12 rounded-full bg-gradient-to-r ${category.color}`} />
+                  <div className={`h-1.5 w-12 rounded-full bg-gradient-to-r ${category.gradient}`} />
                   <h3 className="font-display font-semibold text-lg">{category.title}</h3>
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   {category.skills.map((skill) => (
-                    <motion.div
+                    <div
                       key={skill}
-                      whileHover={{ scale: 1.05 }}
-                      className="flex items-center gap-2.5 px-3 py-2.5 bg-secondary/50 rounded-lg hover:bg-primary/10 transition-colors group/skill cursor-default"
+                      className="flex items-center gap-2.5 px-3 py-2.5 bg-secondary/50 rounded-lg hover:bg-primary/10 hover:scale-105 instant-hover cursor-default group/skill"
                     >
                       {techIcons[skill] ? (
                         <img
                           src={techIcons[skill]}
                           alt={skill}
                           className="w-5 h-5 object-contain"
+                          loading="lazy"
                         />
                       ) : (
                         <div className="w-5 h-5 rounded bg-primary/20" />
@@ -191,20 +190,17 @@ const Skills = () => {
                       <span className="text-sm text-muted-foreground group-hover/skill:text-foreground transition-colors truncate">
                         {skill}
                       </span>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Currently Learning */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-12 text-center"
+        <div
+          className={`mt-12 text-center transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <p className="text-sm text-muted-foreground mb-3">Currently Exploring</p>
           <div className="flex flex-wrap justify-center gap-3">
@@ -215,19 +211,18 @@ const Skills = () => {
               { name: "Microservices", icon: null },
               { name: "System Design", icon: null },
             ].map((tech) => (
-              <motion.span
+              <span
                 key={tech.name}
-                whileHover={{ scale: 1.05, borderColor: "hsl(var(--primary))" }}
-                className="flex items-center gap-2 px-4 py-2 text-sm border border-dashed border-primary/30 rounded-lg text-primary/80 hover:text-primary transition-colors cursor-default"
+                className="flex items-center gap-2 px-4 py-2 text-sm border border-dashed border-primary/30 rounded-lg text-primary/80 hover:text-primary hover:border-primary hover:scale-105 instant-hover cursor-default"
               >
                 {tech.icon && (
-                  <img src={tech.icon} alt={tech.name} className="w-4 h-4 object-contain" />
+                  <img src={tech.icon} alt={tech.name} className="w-4 h-4 object-contain" loading="lazy" />
                 )}
                 {tech.name}
-              </motion.span>
+              </span>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
