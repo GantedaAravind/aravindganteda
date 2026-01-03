@@ -161,28 +161,16 @@ const Hero = () => {
   return (
     <section className="min-h-screen pt-44 pb-8 relative overflow-hidden">
       {/* Grid Background */}
-      <div className="absolute inset-0 grid-background pointer-events-none" />
+      <div className="absolute inset-0 grid-background pointer-events-none opacity-60" />
       
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background pointer-events-none" />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: 'var(--gradient-hero)' }} />
 
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-20 left-10 w-72 h-72 bg-primary/10 rounded-full blur-3xl"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl"
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 10, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-primary/5 to-accent/5 rounded-full blur-3xl"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-        />
+      {/* GPU-accelerated floating orbs - uses CSS animations for performance */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none gpu-accelerate">
+        <div className="floating-orb floating-orb-1" />
+        <div className="floating-orb floating-orb-2" />
+        <div className="floating-orb floating-orb-3" />
       </div>
 
       <div className="container max-w-7xl mx-auto px-4 relative z-10">
@@ -299,33 +287,34 @@ const Hero = () => {
             >
               <Button 
                 size="lg" 
-                className="gap-2 rounded-full px-6 bg-gradient-to-r from-primary to-accent shadow-lg shadow-primary/25 hover:shadow-primary/40 hover:scale-105 transition-all duration-300" 
+                className="gap-2 rounded-full px-8 py-6 text-base font-semibold btn-glow instant-hover" 
+                style={{ background: 'var(--gradient-primary)' }}
                 asChild
               >
                 <a href="#projects">
-                  <ExternalLink className="w-4 h-4" />
+                  <ExternalLink className="w-5 h-5" />
                   View Projects
                 </a>
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="gap-2 rounded-full px-6 hover:bg-primary/5 hover:border-primary/50 hover:scale-105 transition-all duration-300" 
+                className="gap-2 rounded-full px-8 py-6 text-base font-semibold border-2 border-primary/30 hover:bg-primary/10 hover:border-primary instant-hover" 
                 asChild
               >
                 <a href="#contact">
-                  <Mail className="w-4 h-4" />
+                  <Mail className="w-5 h-5" />
                   Contact Me
                 </a>
               </Button>
               <Button 
                 variant="ghost" 
                 size="lg" 
-                className="gap-2 rounded-full px-6 border border-border/50 hover:border-primary/30 hover:bg-primary/5 transition-all duration-300" 
+                className="gap-2 rounded-full px-6 py-6 text-base border border-border hover:border-primary/40 hover:bg-primary/5 instant-hover" 
                 asChild
               >
                 <a href="/resume.pdf" target="_blank">
-                  <Download className="w-4 h-4" />
+                  <Download className="w-5 h-5" />
                   Resume
                 </a>
               </Button>
@@ -372,19 +361,19 @@ const Hero = () => {
             className="relative lg:pl-6"
           >
             {/* Code Block with Letter by Letter Typing Animation */}
-            <div className="relative bg-slate-900 dark:bg-card/80 backdrop-blur-sm rounded-2xl border border-slate-700 dark:border-border shadow-2xl shadow-primary/10 overflow-hidden hover:border-primary/50 dark:hover:border-primary/30 transition-colors duration-500">
+            <div className="relative card-glass rounded-2xl overflow-hidden hover:border-primary/50 transition-colors duration-300 gradient-border">
               {/* Window Header */}
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-slate-700 dark:border-border bg-slate-800/50 dark:bg-muted/30">
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-muted/30">
                 <div className="flex gap-1.5">
-                  <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <span className="w-3 h-3 rounded-full bg-green-500/80" />
+                  <span className="w-3 h-3 rounded-full bg-red-500" />
+                  <span className="w-3 h-3 rounded-full bg-yellow-500" />
+                  <span className="w-3 h-3 rounded-full bg-green-500" />
                 </div>
-                <span className="text-xs text-slate-400 dark:text-muted-foreground font-mono ml-2">developer.js</span>
+                <span className="text-xs text-muted-foreground font-mono ml-2">developer.js</span>
               </div>
 
-              <div className="p-6 font-mono text-sm min-h-[260px]">
-                <pre className="leading-relaxed whitespace-pre-wrap text-slate-100 dark:text-foreground">
+              <div className="p-6 font-mono text-sm min-h-[260px] bg-slate-900/95 dark:bg-slate-950/90">
+                <pre className="leading-relaxed whitespace-pre-wrap text-slate-100">
                   <SyntaxHighlightedCode code={displayedText} showCursor={showCursor} />
                 </pre>
               </div>
@@ -397,13 +386,13 @@ const Hero = () => {
                   key={stat.label}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
-                  className="text-center p-4 rounded-xl bg-muted/30 border border-border/50 hover:border-primary/30 transition-all cursor-default group"
+                  transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
+                  className="text-center p-4 rounded-xl card-glass hover:border-primary/40 instant-hover cursor-default group"
                 >
-                  <div className="text-2xl md:text-3xl font-display font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
+                  <div className="text-2xl md:text-3xl font-display font-bold text-gradient mb-1">
                     {stat.value}
                   </div>
-                  <div className="text-xs text-muted-foreground">{stat.label}</div>
+                  <div className="text-xs text-muted-foreground group-hover:text-foreground transition-colors">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
