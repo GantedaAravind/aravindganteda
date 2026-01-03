@@ -1,5 +1,4 @@
 import { GraduationCap, Briefcase, Code, Award, Sparkles, Rocket, Target, Cpu, Calendar } from "lucide-react";
-import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const timeline = [
@@ -10,98 +9,72 @@ const timeline = [
 ];
 
 const stats = [
-  { icon: GraduationCap, value: "9.4", label: "CGPA", color: "from-primary to-primary/70" },
+  { icon: GraduationCap, value: "9.4", label: "CGPA", color: "from-primary to-accent" },
   { icon: Code, value: "400+", label: "DSA Problems", color: "from-blue-500 to-cyan-500" },
   { icon: Briefcase, value: "1+", label: "Years Exp", color: "from-green-500 to-emerald-500" },
-  { icon: Award, value: "MERN", label: "Certified", color: "from-purple-500 to-pink-500" },
+  { icon: Award, value: "MERN", label: "Certified", color: "from-pink-500 to-rose-500" },
 ];
 
 const About = () => {
   const { ref, isVisible } = useScrollAnimation(0.1);
 
   return (
-    <section id="about" className="py-24 px-6" ref={ref}>
-      <div className="container max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+    <section id="about" className="py-24 px-6 relative overflow-hidden" ref={ref}>
+      {/* Background Effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="floating-orb floating-orb-1 opacity-50" />
+        <div className="floating-orb floating-orb-2 opacity-50" />
+      </div>
+
+      <div className="container max-w-6xl relative">
+        <div
+          className={`text-center mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <p className="text-primary font-display font-medium tracking-wider uppercase text-sm mb-4">
             About Me
           </p>
           <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
-            Turning Ideas into Scalable Digital Solutions
+            Turning Ideas into <span className="text-gradient">Scalable Solutions</span>
           </h2>
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left - Journey Timeline + Visual */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-8"
+          <div
+            className={`space-y-8 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}
           >
             {/* Visual Card */}
             <div className="relative">
               <div className="aspect-[4/3] rounded-2xl card-glass p-1 relative overflow-hidden">
-                <div className="w-full h-full rounded-xl bg-gradient-to-br from-primary/10 via-background to-primary/5 flex items-center justify-center relative">
-                  {/* Floating Elements */}
+                <div className="w-full h-full rounded-xl bg-gradient-to-br from-primary/10 via-background to-accent/5 flex items-center justify-center relative">
+                  {/* Floating Elements - CSS animations for performance */}
                   <div className="absolute inset-0 overflow-hidden">
-                    <motion.div
-                      className="absolute top-10 left-10 w-20 h-20 rounded-full border border-primary/20"
-                      animate={{ scale: [1, 1.1, 1] }}
-                      transition={{ duration: 3, repeat: Infinity }}
-                    />
-                    <motion.div
-                      className="absolute bottom-20 right-8 w-16 h-16 rounded-full bg-primary/5"
-                      animate={{ y: [0, -10, 0] }}
-                      transition={{ duration: 4, repeat: Infinity }}
-                    />
-                    <motion.div
-                      className="absolute top-1/3 right-16 w-12 h-12 rounded-lg border border-primary/30 rotate-45"
-                      animate={{ rotate: [45, 90, 45] }}
-                      transition={{ duration: 8, repeat: Infinity }}
-                    />
+                    <div className="absolute top-10 left-10 w-20 h-20 rounded-full border border-primary/30 animate-pulse" />
+                    <div className="absolute bottom-20 right-8 w-16 h-16 rounded-full bg-accent/10 animate-float" />
+                    <div className="absolute top-1/3 right-16 w-12 h-12 rounded-lg border border-primary/30 rotate-45" />
                     
                     {/* Tech icons floating */}
-                    <motion.div
-                      className="absolute top-8 right-12 p-3 rounded-xl bg-primary/10 border border-primary/20"
-                      animate={{ y: [0, -8, 0] }}
-                      transition={{ duration: 2.5, repeat: Infinity }}
-                    >
+                    <div className="absolute top-8 right-12 p-3 rounded-xl bg-primary/10 border border-primary/20 animate-float" style={{ animationDelay: '0s' }}>
                       <Code className="w-5 h-5 text-primary" />
-                    </motion.div>
-                    <motion.div
-                      className="absolute bottom-16 left-12 p-3 rounded-xl bg-green-500/10 border border-green-500/20"
-                      animate={{ y: [0, -10, 0] }}
-                      transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-                    >
+                    </div>
+                    <div className="absolute bottom-16 left-12 p-3 rounded-xl bg-green-500/10 border border-green-500/20 animate-float" style={{ animationDelay: '0.5s' }}>
                       <Rocket className="w-5 h-5 text-green-500" />
-                    </motion.div>
-                    <motion.div
-                      className="absolute top-1/2 left-8 p-3 rounded-xl bg-blue-500/10 border border-blue-500/20"
-                      animate={{ y: [0, -6, 0] }}
-                      transition={{ duration: 2.8, repeat: Infinity, delay: 1 }}
-                    >
+                    </div>
+                    <div className="absolute top-1/2 left-8 p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 animate-float" style={{ animationDelay: '1s' }}>
                       <Target className="w-5 h-5 text-blue-500" />
-                    </motion.div>
-                    <motion.div
-                      className="absolute bottom-8 right-20 p-3 rounded-xl bg-orange-500/10 border border-orange-500/20"
-                      animate={{ y: [0, -8, 0] }}
-                      transition={{ duration: 3.2, repeat: Infinity, delay: 0.3 }}
-                    >
+                    </div>
+                    <div className="absolute bottom-8 right-20 p-3 rounded-xl bg-orange-500/10 border border-orange-500/20 animate-float" style={{ animationDelay: '0.3s' }}>
                       <Cpu className="w-5 h-5 text-orange-500" />
-                    </motion.div>
+                    </div>
                   </div>
 
                   {/* Center Content */}
                   <div className="text-center p-8 relative z-10">
-                    <div className="w-28 h-28 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-2xl shadow-primary/30 relative">
-                      <span className="text-3xl font-display font-bold text-primary-foreground">AG</span>
-                      <Sparkles className="absolute -top-2 -right-2 w-5 h-5 text-yellow-500 animate-pulse" />
+                    <div className="w-28 h-28 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-2xl relative overflow-hidden" style={{ background: 'var(--gradient-primary)' }}>
+                      <span className="text-3xl font-display font-bold text-white relative z-10">AG</span>
+                      <Sparkles className="absolute -top-2 -right-2 w-5 h-5 text-yellow-300 animate-pulse" />
+                      {/* Shimmer */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent translate-x-[-100%] animate-shimmer" />
                     </div>
                     <p className="text-foreground font-semibold text-lg">Aravind Ganteda</p>
                     <p className="text-primary font-medium text-sm">Full-Stack Developer</p>
@@ -123,39 +96,35 @@ const About = () => {
                 <h3 className="font-display font-semibold">My Journey</h3>
               </div>
               <div className="relative">
-                <div className="absolute left-3 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-blue-500 to-green-500" />
+                <div className="absolute left-3 top-0 bottom-0 w-0.5" style={{ background: 'var(--gradient-primary)' }} />
                 <div className="space-y-4">
                   {timeline.map((item, index) => (
-                    <motion.div
+                    <div
                       key={item.year}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={isVisible ? { opacity: 1, x: 0 } : {}}
-                      transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                      className="flex items-center gap-4 pl-8 relative"
+                      className={`flex items-center gap-4 pl-8 relative transition-all duration-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
+                      style={{ transitionDelay: `${400 + index * 100}ms` }}
                     >
-                      <div className="absolute left-0 p-1.5 rounded-lg bg-background border border-border">
+                      <div className="absolute left-0 p-1.5 rounded-lg bg-background border border-primary/30">
                         <item.icon className="w-3 h-3 text-primary" />
                       </div>
-                      <span className="text-sm font-bold text-primary">{item.year}</span>
+                      <span className="text-sm font-bold text-gradient">{item.year}</span>
                       <span className="text-sm text-muted-foreground">{item.event}</span>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right - Content */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isVisible ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
+          <div
+            className={`transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
           >
             <div className="space-y-4 text-muted-foreground leading-relaxed mb-8">
               <p>
                 Hey there! I'm <span className="text-foreground font-medium">Aravind Ganteda</span>, 
                 a Full-Stack Developer currently engineering solutions at{" "}
-                <span className="text-primary font-medium">Gridlex</span>. I specialize in building 
+                <span className="text-gradient font-semibold">Gridlex</span>. I specialize in building 
                 performant, user-centric web applications using the{" "}
                 <span className="text-foreground font-medium">MERN stack</span>, with a strong focus 
                 on code quality and performance optimization.
@@ -163,7 +132,7 @@ const About = () => {
               <p>
                 Pursuing my B.Tech in Computer Science at{" "}
                 <span className="text-foreground font-medium">RGUKT Nuzvid</span> with a{" "}
-                <span className="text-primary font-medium">9.4 CGPA</span>, I've developed a solid 
+                <span className="text-gradient font-semibold">9.4 CGPA</span>, I've developed a solid 
                 foundation in both theoretical concepts and practical application. From building 
                 full-stack e-commerce platforms to solving{" "}
                 <span className="text-foreground font-medium">400+ DSA problems</span>, I thrive on 
@@ -181,24 +150,22 @@ const About = () => {
             {/* Quick stats */}
             <div className="grid grid-cols-2 gap-4">
               {stats.map((stat, index) => (
-                <motion.div
+                <div
                   key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                  className="group"
+                  className={`group transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                  style={{ transitionDelay: `${500 + index * 100}ms` }}
                 >
-                  <div className="card-glass rounded-xl p-4 hover:border-primary/30 transition-all duration-300 group-hover:-translate-y-1">
-                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${stat.color} flex items-center justify-center mb-3`}>
+                  <div className="card-glass rounded-xl p-4 hover:border-primary/40 instant-hover hover-lift group-hover:shadow-lg">
+                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${stat.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
                       <stat.icon className="w-5 h-5 text-white" />
                     </div>
-                    <p className="text-2xl font-display font-bold group-hover:text-primary transition-colors">{stat.value}</p>
+                    <p className="text-2xl font-display font-bold text-gradient">{stat.value}</p>
                     <p className="text-xs text-muted-foreground">{stat.label}</p>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
