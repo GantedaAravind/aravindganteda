@@ -9,7 +9,7 @@ const achievements = [
     icon: Code,
     gradient: "from-orange-500 to-amber-500",
     stats: "Top 10%",
-    link: "https://leetcode.com/aravindganteda",
+    link: "https://leetcode.com/u/GANTEDAARAVIND/",
     details: ["Arrays & Strings", "Trees & Graphs", "Dynamic Programming", "System Design"],
   },
   {
