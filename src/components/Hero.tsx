@@ -160,11 +160,12 @@ const Hero = () => {
 
   return (
     <section className="min-h-screen pt-44 pb-8 relative overflow-hidden">
-      {/* Grid Background */}
-      <div className="absolute inset-0 grid-background pointer-events-none opacity-60" />
+      {/* Grid Background - more visible */}
+      <div className="absolute inset-0 grid-background pointer-events-none" />
+      <div className="absolute inset-0 grid-background-bold pointer-events-none" />
       
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 pointer-events-none" style={{ background: 'var(--gradient-hero)' }} />
+      <div className="absolute inset-0 pointer-events-none opacity-80" style={{ background: 'var(--gradient-hero)' }} />
 
       {/* GPU-accelerated floating orbs - uses CSS animations for performance */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none gpu-accelerate">
