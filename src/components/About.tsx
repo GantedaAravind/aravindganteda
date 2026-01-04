@@ -19,24 +19,24 @@ const About = () => {
   const { ref, isVisible } = useScrollAnimation(0.1);
 
   return (
-    <section id="about" className="py-24 px-6 relative overflow-hidden" ref={ref}>
+    <section id="about" className="py-24 px-6 relative overflow-hidden" ref={ref} aria-labelledby="about-heading">
       {/* Background Effects */}
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="floating-orb floating-orb-1 opacity-50" />
         <div className="floating-orb floating-orb-2 opacity-50" />
       </div>
 
       <div className="container max-w-6xl relative">
-        <div
+        <header
           className={`text-center mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <p className="text-primary font-display font-medium tracking-wider uppercase text-sm mb-4">
             About Me
           </p>
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+          <h2 id="about-heading" className="text-3xl md:text-4xl font-display font-bold mb-4">
             Turning Ideas into <span className="text-gradient">Scalable Solutions</span>
           </h2>
-        </div>
+        </header>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left - Journey Timeline + Visual */}
@@ -92,27 +92,27 @@ const About = () => {
             {/* Journey Timeline */}
             <div className="card-glass rounded-xl p-6">
               <div className="flex items-center gap-2 mb-4">
-                <Calendar className="w-4 h-4 text-primary" />
+                <Calendar className="w-4 h-4 text-primary" aria-hidden="true" />
                 <h3 className="font-display font-semibold">My Journey</h3>
               </div>
-              <div className="relative">
-                <div className="absolute left-3 top-0 bottom-0 w-0.5" style={{ background: 'var(--gradient-primary)' }} />
+              <ol className="relative" aria-label="Career timeline">
+                <div className="absolute left-3 top-0 bottom-0 w-0.5" style={{ background: 'var(--gradient-primary)' }} aria-hidden="true" />
                 <div className="space-y-4">
                   {timeline.map((item, index) => (
-                    <div
+                    <li
                       key={item.year}
                       className={`flex items-center gap-4 pl-8 relative transition-all duration-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
                       style={{ transitionDelay: `${400 + index * 100}ms` }}
                     >
-                      <div className="absolute left-0 p-1.5 rounded-lg bg-background border border-primary/30">
+                      <div className="absolute left-0 p-1.5 rounded-lg bg-background border border-primary/30" aria-hidden="true">
                         <item.icon className="w-3 h-3 text-primary" />
                       </div>
-                      <span className="text-sm font-bold text-gradient">{item.year}</span>
+                      <time className="text-sm font-bold text-gradient">{item.year}</time>
                       <span className="text-sm text-muted-foreground">{item.event}</span>
-                    </div>
+                    </li>
                   ))}
                 </div>
-              </div>
+              </ol>
             </div>
           </div>
 
@@ -148,23 +148,23 @@ const About = () => {
             </div>
 
             {/* Quick stats */}
-            <div className="grid grid-cols-2 gap-4">
+            <ul className="grid grid-cols-2 gap-4" aria-label="Quick statistics">
               {stats.map((stat, index) => (
-                <div
+                <li
                   key={stat.label}
                   className={`group transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
                   style={{ transitionDelay: `${500 + index * 100}ms` }}
                 >
                   <div className="card-glass rounded-xl p-4 hover:border-primary/40 instant-hover hover-lift group-hover:shadow-lg">
-                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${stat.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`}>
+                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-br ${stat.color} flex items-center justify-center mb-3 group-hover:scale-110 transition-transform`} aria-hidden="true">
                       <stat.icon className="w-5 h-5 text-white" />
                     </div>
                     <p className="text-2xl font-display font-bold text-gradient">{stat.value}</p>
                     <p className="text-xs text-muted-foreground">{stat.label}</p>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         </div>
       </div>

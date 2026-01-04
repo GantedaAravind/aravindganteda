@@ -83,52 +83,55 @@ const Skills = () => {
     : skillCategories;
 
   return (
-    <section id="skills" className="py-24 px-6 relative overflow-hidden" ref={ref}>
+    <section id="skills" className="py-24 px-6 relative overflow-hidden" ref={ref} aria-labelledby="skills-heading">
       {/* Background */}
-      <div className="absolute inset-0 bg-secondary/30" />
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 bg-secondary/30" aria-hidden="true" />
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="floating-orb floating-orb-2 opacity-30" />
         <div className="floating-orb floating-orb-3 opacity-30" />
       </div>
 
       <div className="container max-w-6xl relative">
-        <div
+        <header
           className={`text-center mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <p className="text-primary font-display font-medium tracking-wider uppercase text-sm mb-4">
             Skills & Expertise
           </p>
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+          <h2 id="skills-heading" className="text-3xl md:text-4xl font-display font-bold mb-4">
             Technologies I <span className="text-gradient">Work With</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Constantly learning and expanding my toolkit to deliver the best solutions.
           </p>
-        </div>
+        </header>
 
         {/* Highlights */}
-        <div
+        <ul
           className={`flex flex-wrap justify-center gap-4 mb-8 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          aria-label="Key achievements"
         >
           {highlights.map((item) => (
-            <div
+            <li
               key={item.label}
               className="flex items-center gap-3 px-5 py-3 card-glass rounded-xl border-primary/20 bg-primary/5 hover:border-primary/40 instant-hover"
             >
-              <div className="p-2 rounded-lg" style={{ background: 'var(--gradient-primary)' }}>
+              <div className="p-2 rounded-lg" style={{ background: 'var(--gradient-primary)' }} aria-hidden="true">
                 <item.icon className="w-5 h-5 text-white" />
               </div>
               <div>
                 <p className="font-semibold text-foreground">{item.label}</p>
                 <p className="text-xs text-muted-foreground">{item.desc}</p>
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
 
         {/* Filter Buttons */}
         <div
           className={`flex flex-wrap justify-center gap-2 mb-8 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+          role="group"
+          aria-label="Filter skills by category"
         >
           <button
             onClick={() => setActiveFilter(null)}
@@ -138,8 +141,9 @@ const Skills = () => {
                 : "bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground"
             }`}
             style={activeFilter === null ? { background: 'var(--gradient-primary)' } : {}}
+            aria-pressed={activeFilter === null}
           >
-            <Filter className="w-3.5 h-3.5" />
+            <Filter className="w-3.5 h-3.5" aria-hidden="true" />
             All
           </button>
           {skillCategories.map((cat) => (
@@ -152,6 +156,7 @@ const Skills = () => {
                   : "bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground"
               }`}
               style={activeFilter === cat.title ? { background: 'var(--gradient-primary)' } : {}}
+              aria-pressed={activeFilter === cat.title}
             >
               {cat.title}
             </button>
@@ -159,42 +164,44 @@ const Skills = () => {
         </div>
 
         {/* Skills Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="Skills by category">
           {filteredCategories.map((category, catIndex) => (
-            <div
+            <article
               key={category.title}
               className={`group transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={{ transitionDelay: `${100 * catIndex}ms` }}
+              role="listitem"
             >
               <div className="card-glass rounded-xl p-6 h-full hover:border-primary/50 instant-hover hover-lift">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className={`h-1.5 w-12 rounded-full bg-gradient-to-r ${category.gradient}`} />
+                  <div className={`h-1.5 w-12 rounded-full bg-gradient-to-r ${category.gradient}`} aria-hidden="true" />
                   <h3 className="font-display font-semibold text-lg">{category.title}</h3>
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <ul className="grid grid-cols-2 gap-3" aria-label={`${category.title} skills`}>
                   {category.skills.map((skill) => (
-                    <div
+                    <li
                       key={skill}
                       className="flex items-center gap-2.5 px-3 py-2.5 bg-secondary/50 rounded-lg hover:bg-primary/10 hover:scale-105 instant-hover cursor-default group/skill"
                     >
                       {techIcons[skill] ? (
                         <img
                           src={techIcons[skill]}
-                          alt={skill}
+                          alt=""
                           className="w-5 h-5 object-contain"
                           loading="lazy"
+                          aria-hidden="true"
                         />
                       ) : (
-                        <div className="w-5 h-5 rounded bg-primary/20" />
+                        <div className="w-5 h-5 rounded bg-primary/20" aria-hidden="true" />
                       )}
                       <span className="text-sm text-muted-foreground group-hover/skill:text-foreground transition-colors truncate">
                         {skill}
                       </span>
-                    </div>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
