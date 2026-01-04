@@ -159,10 +159,17 @@
 
   /* Premium grid background */
   .grid-background {
-    background-size: 60px 60px;
+    background-size: 50px 50px;
     background-image:
-      linear-gradient(to right, hsl(var(--grid-color) / 0.4) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--grid-color) / 0.4) 1px, transparent 1px);
+      linear-gradient(to right, hsl(var(--grid-color) / 0.6) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--grid-color) / 0.6) 1px, transparent 1px);
+  }
+
+  .grid-background-bold {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, hsl(var(--primary) / 0.12) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary) / 0.12) 1px, transparent 1px);
   }
 
   /* Animated gradient border */
