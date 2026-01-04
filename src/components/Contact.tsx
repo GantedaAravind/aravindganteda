@@ -5,23 +5,23 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 const socialLinks = [
   {
     name: "GitHub",
-    url: "https://github.com/aravindganteda",
+    url: "https://github.com/GantedaAravind",
     icon: Github,
-    username: "@aravindganteda",
+    username: "@GantedaAravind",
     hoverBg: "hover:bg-foreground hover:text-background",
   },
   {
     name: "LinkedIn",
-    url: "https://www.linkedin.com/in/aravind-ganteda",
+    url: "https://www.linkedin.com/in/ganteda-aravind-113b2427a/",
     icon: Linkedin,
-    username: "aravind-ganteda",
+    username: "ganteda-aravind",
     hoverBg: "hover:bg-blue-500 hover:text-white",
   },
   {
     name: "LeetCode",
-    url: "https://leetcode.com/aravindganteda",
+    url: "https://leetcode.com/u/GANTEDAARAVIND/",
     icon: Code,
-    username: "aravindganteda",
+    username: "GANTEDAARAVIND",
     hoverBg: "hover:bg-orange-500 hover:text-white",
   },
 ];
@@ -116,7 +116,7 @@ const Contact = () => {
                 </a>
               </Button>
               <Button variant="outline" size="lg" className="gap-2 rounded-full px-8 hover:bg-primary/10 hover:border-primary/40 instant-hover" asChild>
-                <a href="https://www.linkedin.com/in/aravind-ganteda" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/ganteda-aravind-113b2427a/" target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="w-4 h-4" />
                   Message on LinkedIn
                 </a>

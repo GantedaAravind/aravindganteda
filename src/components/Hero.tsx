@@ -329,7 +329,7 @@ const Hero = () => {
             >
               <span className="text-sm text-muted-foreground mr-2">Find me on</span>
               <a
-                href="https://www.linkedin.com/in/aravind-ganteda"
+                href="https://www.linkedin.com/in/ganteda-aravind-113b2427a/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-xl bg-muted/30 border border-border/50 hover:bg-[#0077B5] hover:border-[#0077B5] hover:text-white transition-all duration-300 text-muted-foreground group"
@@ -337,7 +337,7 @@ const Hero = () => {
                 <Linkedin className="w-4 h-4 group-hover:scale-110 transition-transform" />
               </a>
               <a
-                href="https://github.com/aravindganteda"
+                href="https://github.com/GantedaAravind"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-2.5 rounded-xl bg-muted/30 border border-border/50 hover:bg-foreground hover:border-foreground hover:text-background transition-all duration-300 text-muted-foreground group"
