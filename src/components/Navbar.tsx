@@ -96,7 +96,7 @@ const Navbar = () => {
   return (
     <>
       {/* Scroll Progress Bar */}
-      <div className="fixed top-0 left-0 right-0 h-0.5 z-[60] bg-transparent">
+      <div className="fixed top-0 left-0 right-0 h-0.5 z-[60] bg-transparent" role="progressbar" aria-valuenow={Math.round(scrollProgress)} aria-valuemin={0} aria-valuemax={100} aria-label="Page scroll progress">
         <motion.div 
           className="h-full bg-gradient-to-r from-primary via-accent to-primary"
           style={{ width: `${scrollProgress}%` }}
@@ -111,13 +111,14 @@ const Navbar = () => {
             ? "py-2" 
             : "py-4"
         }`}
+        role="banner"
       >
         <div className="container max-w-7xl mx-auto px-4">
           <nav className={`relative rounded-2xl transition-all duration-500 ${
             isScrolled 
               ? "bg-background/60 backdrop-blur-2xl border border-border/50 shadow-lg shadow-primary/5 px-4 py-2" 
               : "bg-transparent px-2 py-2"
-          }`}>
+          }`} role="navigation" aria-label="Main navigation">
             <div className="flex items-center justify-between">
               {/* Logo */}
               <a 
@@ -149,45 +150,48 @@ const Navbar = () => {
 
               {/* Desktop Nav - Floating pill style */}
               <div className="hidden lg:flex items-center">
-                <div className="relative flex items-center gap-1 bg-muted/40 backdrop-blur-md rounded-full px-1.5 py-1.5 border border-border/30">
+                <ul className="relative flex items-center gap-1 bg-muted/40 backdrop-blur-md rounded-full px-1.5 py-1.5 border border-border/30" role="menubar">
                   {navLinks.map((link) => {
                     const isActive = activeSection === link.href;
                     const isHovered = hoveredLink === link.href;
                     
                     return (
-                      <a
-                        key={link.name}
-                        href={link.href}
-                        onClick={(e) => handleNavClick(e, link.href)}
-                        onMouseEnter={() => setHoveredLink(link.href)}
-                        onMouseLeave={() => setHoveredLink(null)}
-                        className="relative px-4 py-2 text-sm font-medium transition-colors duration-200 z-10"
-                      >
-                        {/* Background pill animation */}
-                        {(isActive || isHovered) && (
-                          <motion.div
-                            layoutId="navPill"
-                            className={`absolute inset-0 rounded-full ${
-                              isActive 
-                                ? 'bg-primary shadow-lg shadow-primary/30' 
-                                : 'bg-muted/60'
-                            }`}
-                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                          />
-                        )}
-                        <span className={`relative z-10 transition-colors duration-200 ${
-                          isActive 
-                            ? 'text-primary-foreground' 
-                            : isHovered 
-                              ? 'text-foreground' 
-                              : 'text-muted-foreground'
-                        }`}>
-                          {link.name}
-                        </span>
-                      </a>
+                      <li key={link.name} role="none">
+                        <a
+                          href={link.href}
+                          onClick={(e) => handleNavClick(e, link.href)}
+                          onMouseEnter={() => setHoveredLink(link.href)}
+                          onMouseLeave={() => setHoveredLink(null)}
+                          className="relative px-4 py-2 text-sm font-medium transition-colors duration-200 z-10 block"
+                          role="menuitem"
+                          aria-current={isActive ? "page" : undefined}
+                        >
+                          {/* Background pill animation */}
+                          {(isActive || isHovered) && (
+                            <motion.div
+                              layoutId="navPill"
+                              className={`absolute inset-0 rounded-full ${
+                                isActive 
+                                  ? 'bg-primary shadow-lg shadow-primary/30' 
+                                  : 'bg-muted/60'
+                              }`}
+                              transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                            />
+                          )}
+                          <span className={`relative z-10 transition-colors duration-200 ${
+                            isActive 
+                              ? 'text-primary-foreground' 
+                              : isHovered 
+                                ? 'text-foreground' 
+                                : 'text-muted-foreground'
+                          }`}>
+                            {link.name}
+                          </span>
+                        </a>
+                      </li>
                     );
                   })}
-                </div>
+                </ul>
               </div>
 
               {/* Right Side - Actions */}

@@ -46,69 +46,70 @@ const Projects = () => {
   const { ref, isVisible } = useScrollAnimation(0.1);
 
   return (
-    <section id="projects" className="py-24 px-6 relative overflow-hidden" ref={ref}>
+    <section id="projects" className="py-24 px-6 relative overflow-hidden" ref={ref} aria-labelledby="projects-heading">
       {/* Background decoration */}
-      <div className="absolute inset-0 grid-background opacity-40" />
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 grid-background opacity-40" aria-hidden="true" />
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="floating-orb floating-orb-1 opacity-40" />
         <div className="floating-orb floating-orb-3 opacity-30" />
       </div>
       
       <div className="container max-w-6xl relative">
-        <div
+        <header
           className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <p className="text-primary font-display font-medium tracking-wider uppercase text-sm mb-4">
             Portfolio
           </p>
-          <h2 className="text-3xl md:text-4xl font-display font-bold mb-4">
+          <h2 id="projects-heading" className="text-3xl md:text-4xl font-display font-bold mb-4">
             Featured <span className="text-gradient">Projects</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Real-world applications showcasing full-stack expertise and performance optimization.
           </p>
-        </div>
+        </header>
 
         {/* Projects - Full Width Cards */}
-        <div className="space-y-8">
+        <div className="space-y-8" role="list" aria-label="Featured projects">
           {projects.map((project, index) => (
-            <div
+            <article
               key={project.title}
               className={`group relative transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
               style={{ transitionDelay: `${index * 200}ms` }}
+              role="listitem"
             >
               {/* Card Glow */}
-              <div className={`absolute -inset-0.5 bg-gradient-to-r ${project.gradient} rounded-3xl blur opacity-0 group-hover:opacity-25 transition-opacity duration-500`} />
+              <div className={`absolute -inset-0.5 bg-gradient-to-r ${project.gradient} rounded-3xl blur opacity-0 group-hover:opacity-25 transition-opacity duration-500`} aria-hidden="true" />
               
               {/* Main Card */}
               <div className="relative card-glass rounded-2xl overflow-hidden hover:border-primary/40 instant-hover">
                 <div className="grid lg:grid-cols-2 gap-0">
                   {/* Preview Image */}
-                  <div className={`relative aspect-video lg:aspect-auto overflow-hidden ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                    <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20`} />
+                  <figure className={`relative aspect-video lg:aspect-auto overflow-hidden ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                    <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20`} aria-hidden="true" />
                     <img
                       src={project.preview}
-                      alt={project.title}
+                      alt={`Screenshot of ${project.title} - ${project.subtitle}`}
                       className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                       loading="lazy"
                     />
                     {/* Overlay with icon */}
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true">
                       <div className="p-4 rounded-full bg-background/90 border border-border shadow-xl cursor-pointer hover:scale-110 instant-hover">
                         <Play className="w-8 h-8 text-primary" />
                       </div>
                     </div>
                     {/* Stats Badge */}
                     <div className={`absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-white text-sm font-medium shadow-lg bg-gradient-to-r ${project.gradient}`}>
-                      <project.stats.icon className="w-4 h-4" />
-                      {project.stats.value}
+                      <project.stats.icon className="w-4 h-4" aria-hidden="true" />
+                      <span aria-label={`${project.stats.label}: ${project.stats.value}`}>{project.stats.value}</span>
                     </div>
-                  </div>
+                  </figure>
 
                   {/* Content */}
                   <div className={`p-8 flex flex-col justify-center ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
                     <div className="flex items-center gap-3 mb-4">
-                      <div className={`p-3 rounded-xl text-white shadow-lg bg-gradient-to-br ${project.gradient}`}>
+                      <div className={`p-3 rounded-xl text-white shadow-lg bg-gradient-to-br ${project.gradient}`} aria-hidden="true">
                         <project.icon className="w-6 h-6" />
                       </div>
                       <div>
@@ -124,44 +125,44 @@ const Projects = () => {
                     </p>
 
                     {/* Features */}
-                    <div className="flex flex-wrap gap-2 mb-4">
+                    <ul className="flex flex-wrap gap-2 mb-4" aria-label="Project features">
                       {project.features.map((feature) => (
-                        <span
+                        <li
                           key={feature}
                           className="px-3 py-1 text-xs bg-primary/10 border border-primary/20 rounded-full text-primary font-medium"
                         >
                           {feature}
-                        </span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
 
                     {/* Tech stack with icons */}
-                    <div className="flex flex-wrap gap-2 mb-6">
+                    <ul className="flex flex-wrap gap-2 mb-6" aria-label="Technologies used">
                       {project.tech.map((tech) => (
-                        <span
+                        <li
                           key={tech}
                           className="flex items-center gap-2 px-3 py-1.5 bg-secondary/50 rounded-lg text-sm font-medium text-foreground/80 hover:bg-primary/10 hover:text-primary instant-hover cursor-default"
                         >
                           {techIcons[tech] && (
-                            <img src={techIcons[tech]} alt={tech} className="w-4 h-4" loading="lazy" />
+                            <img src={techIcons[tech]} alt="" className="w-4 h-4" loading="lazy" aria-hidden="true" />
                           )}
                           {tech}
-                        </span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
 
                     {/* Links */}
-                    <div className="flex gap-3">
+                    <div className="flex gap-3" role="group" aria-label="Project links">
                       <Button variant="outline" className="flex-1 group/btn instant-hover" asChild>
-                        <a href={project.github} target="_blank" rel="noopener noreferrer">
-                          <Github className="w-4 h-4 mr-2" />
+                        <a href={project.github} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} source code on GitHub (opens in new tab)`}>
+                          <Github className="w-4 h-4 mr-2" aria-hidden="true" />
                           View Code
-                          <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 -translate-y-1 translate-x-1 group-hover/btn:opacity-100 group-hover/btn:translate-y-0 group-hover/btn:translate-x-0 transition-all" />
+                          <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 -translate-y-1 translate-x-1 group-hover/btn:opacity-100 group-hover/btn:translate-y-0 group-hover/btn:translate-x-0 transition-all" aria-hidden="true" />
                         </a>
                       </Button>
                       <Button className={`flex-1 text-white border-0 hover:opacity-90 btn-glow instant-hover bg-gradient-to-r ${project.gradient}`} asChild>
-                        <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="w-4 h-4 mr-2" />
+                        <a href={project.demo} target="_blank" rel="noopener noreferrer" aria-label={`View ${project.title} live demo (opens in new tab)`}>
+                          <ExternalLink className="w-4 h-4 mr-2" aria-hidden="true" />
                           Live Demo
                         </a>
                       </Button>
@@ -169,30 +170,31 @@ const Projects = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
 
         {/* More Projects CTA */}
-        <div
+        <aside
           className={`text-center mt-12 transition-all duration-700 delay-600 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <div className="inline-flex items-center gap-4 p-5 rounded-2xl card-glass">
-            <Image className="w-5 h-5 text-primary" />
+            <Image className="w-5 h-5 text-primary" aria-hidden="true" />
             <span className="text-muted-foreground">More projects coming soon...</span>
             <a
-              href="https://github.com/aravindganteda"
+              href="https://github.com/GantedaAravind"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-white font-medium group instant-hover"
               style={{ background: 'var(--gradient-primary)' }}
+              aria-label="View all projects on GitHub (opens in new tab)"
             >
-              <Github className="w-4 h-4" />
+              <Github className="w-4 h-4" aria-hidden="true" />
               View GitHub
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" aria-hidden="true" />
             </a>
           </div>
-        </div>
+        </aside>
       </div>
     </section>
   );
