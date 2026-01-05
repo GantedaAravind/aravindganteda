@@ -89,7 +89,7 @@
     --radius: 0.75rem;
 
     /* Grid background for light mode */
-    --grid-color: 252 50% 90%;
+    --grid-color: 252 40% 75%;
 
     /* Premium gradient tokens */
     --gradient-primary: linear-gradient(135deg, hsl(252 85% 60%), hsl(280 75% 55%), hsl(320 80% 55%));
@@ -136,7 +136,7 @@
     --ring: 252 85% 65%;
 
     /* Grid background for dark mode */
-    --grid-color: 252 30% 15%;
+    --grid-color: 252 50% 35%;
 
     /* Premium gradient tokens for dark */
     --gradient-primary: linear-gradient(135deg, hsl(252 85% 65%), hsl(280 85% 65%), hsl(320 85% 60%));
@@ -213,15 +213,15 @@
   .grid-background {
     background-size: 50px 50px;
     background-image:
-      linear-gradient(to right, hsl(var(--grid-color) / 0.6) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--grid-color) / 0.6) 1px, transparent 1px);
+      linear-gradient(to right, hsl(var(--grid-color) / 0.8) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--grid-color) / 0.8) 1px, transparent 1px);
   }
 
   .grid-background-bold {
     background-size: 40px 40px;
     background-image:
-      linear-gradient(to right, hsl(var(--primary) / 0.12) 1px, transparent 1px),
-      linear-gradient(to bottom, hsl(var(--primary) / 0.12) 1px, transparent 1px);
+      linear-gradient(to right, hsl(var(--primary) / 0.25) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary) / 0.25) 1px, transparent 1px);
   }
 
   /* Animated gradient border */
