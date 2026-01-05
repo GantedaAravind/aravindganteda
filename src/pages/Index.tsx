@@ -15,10 +15,9 @@ const Index = () => {
       <main id="main-content" role="main" aria-label="Main content">
         <Hero />
         <About />
-        <Skills />
-        <Projects />
         <Experience />
-        <Achievements />
+        <Projects />
+        <Skills />
         <Contact />
       </main>
       <Footer />
