@@ -165,9 +165,8 @@ const Hero = () => {
       itemScope 
       itemType="https://schema.org/Person"
     >
-      {/* Grid Background - more visible */}
+      {/* Grid Background */}
       <div className="absolute inset-0 grid-background pointer-events-none" aria-hidden="true" />
-      <div className="absolute inset-0 grid-background-bold pointer-events-none" aria-hidden="true" />
       
       {/* Gradient Overlay */}
       <div className="absolute inset-0 pointer-events-none opacity-80" style={{ background: 'var(--gradient-hero)' }} aria-hidden="true" />
