@@ -1,6 +1,9 @@
-import { Github, ExternalLink, ShoppingCart, FileText, ArrowUpRight, Star, Zap, Play, Image } from "lucide-react";
+import { Github, ExternalLink, ShoppingCart, FileText, MessageSquare, ArrowUpRight, Star, Zap, Image } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import megamartPreview from "@/assets/megamart-preview.png";
+import blogbazarPreview from "@/assets/blogbazar-preview.png";
+import chatgeniusPreview from "@/assets/chatgenius-preview.png";
 
 const projects = [
   {
@@ -8,26 +11,39 @@ const projects = [
     subtitle: "E-commerce Platform",
     description: "Full-stack e-commerce platform with debounced search, relevance-based results, and optimized performance. Features include cart management, user authentication, and real-time inventory updates.",
     tech: ["MongoDB", "Express.js", "React.js", "Node.js", "Tailwind CSS"],
-    github: "https://github.com/aravindganteda",
-    demo: "https://megamart-demo.com",
+    github: "https://github.com/GantedaAravind",
+    demo: "https://megamart3.web.app/",
     icon: ShoppingCart,
     gradient: "from-primary to-accent",
     stats: { label: "Load Time", value: "-40%", icon: Zap },
     features: ["Debounced Search", "Cart System", "JWT Auth", "Responsive UI"],
-    preview: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=500&fit=crop",
+    preview: megamartPreview,
   },
   {
     title: "BlogBazzar",
     subtitle: "Blogging Platform",
     description: "Full-stack blogging platform with optimized API interactions using debouncing, lazy loading, and Shimmer UI loaders. Supports rich text editing, comments, and user profiles.",
     tech: ["MERN Stack", "Redux", "Tailwind CSS", "Bootstrap"],
-    github: "https://github.com/aravindganteda",
-    demo: "https://blogbazzar-demo.com",
+    github: "https://github.com/GantedaAravind",
+    demo: "https://blogbazzar365.web.app/",
     icon: FileText,
     gradient: "from-blue-500 to-cyan-500",
     stats: { label: "Performance", value: "A+", icon: Star },
     features: ["Rich Editor", "Lazy Loading", "Comments", "User Profiles"],
-    preview: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=500&fit=crop",
+    preview: blogbazarPreview,
+  },
+  {
+    title: "ChatGenius",
+    subtitle: "AI Chat Application",
+    description: "Intelligent AI-powered chat application with real-time conversations, smart responses, and seamless user experience. Features natural language processing and context-aware interactions.",
+    tech: ["React.js", "Node.js", "Tailwind CSS", "OpenAI"],
+    github: "https://github.com/GantedaAravind",
+    demo: "https://chatgenius360.web.app/",
+    icon: MessageSquare,
+    gradient: "from-emerald-500 to-teal-500",
+    stats: { label: "Response", value: "<1s", icon: Zap },
+    features: ["AI Powered", "Real-time Chat", "Smart Responses", "Context Aware"],
+    preview: chatgeniusPreview,
   },
 ];
 
@@ -40,6 +56,7 @@ const techIcons: Record<string, string> = {
   "MERN Stack": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
   "Redux": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg",
   "Bootstrap": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
+  "OpenAI": "https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/openai.svg",
 };
 
 const Projects = () => {
@@ -93,12 +110,6 @@ const Projects = () => {
                       className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                       loading="lazy"
                     />
-                    {/* Overlay with icon */}
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true">
-                      <div className="p-4 rounded-full bg-background/90 border border-border shadow-xl cursor-pointer hover:scale-110 instant-hover">
-                        <Play className="w-8 h-8 text-primary" />
-                      </div>
-                    </div>
                     {/* Stats Badge */}
                     <div className={`absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-white text-sm font-medium shadow-lg bg-gradient-to-r ${project.gradient}`}>
                       <project.stats.icon className="w-4 h-4" aria-hidden="true" />
