@@ -4,7 +4,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const achievements = [
   {
-    title: "400+ DSA Problems Solved",
+    title: "500+ DSA Problems Solved",
     platform: "LeetCode & GeeksforGeeks",
     icon: Code,
     gradient: "from-orange-500 to-amber-500",
