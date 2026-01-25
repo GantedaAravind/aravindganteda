@@ -70,7 +70,7 @@ const skillCategories = [
 ];
 
 const highlights = [
-  { icon: Brain, label: "400+ DSA Problems", desc: "LeetCode & GeeksforGeeks" },
+  { icon: Brain, label: "500+ DSA Problems", desc: "LeetCode & GeeksforGeeks" },
   { icon: Zap, label: "Performance Expert", desc: "40-60% load time reduction" },
 ];
 

@@ -4,13 +4,13 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 const timeline = [
   { year: "2022", event: "Started B.Tech at RGUKT", icon: GraduationCap },
   { year: "2023", event: "MERN Stack Certified", icon: Award },
-  { year: "2024", event: "400+ DSA Problems", icon: Code },
+  { year: "2024", event: "500+ DSA Problems", icon: Code },
   { year: "2025", event: "Software Engineer @ Gridlex", icon: Briefcase },
 ];
 
 const stats = [
   { icon: GraduationCap, value: "9.4", label: "CGPA", color: "from-primary to-accent" },
-  { icon: Code, value: "400+", label: "DSA Problems", color: "from-blue-500 to-cyan-500" },
+  { icon: Code, value: "500+", label: "DSA Problems", color: "from-blue-500 to-cyan-500" },
   { icon: Briefcase, value: "1+", label: "Years Exp", color: "from-green-500 to-emerald-500" },
   { icon: Award, value: "MERN", label: "Certified", color: "from-pink-500 to-rose-500" },
 ];
@@ -135,7 +135,7 @@ const About = () => {
                 <span className="text-gradient font-semibold">9.4 CGPA</span>, I've developed a solid 
                 foundation in both theoretical concepts and practical application. From building 
                 full-stack e-commerce platforms to solving{" "}
-                <span className="text-foreground font-medium">400+ DSA problems</span>, I thrive on 
+                <span className="text-foreground font-medium">500+ DSA problems</span>, I thrive on 
                 tackling complex challenges.
               </p>
               <p>
